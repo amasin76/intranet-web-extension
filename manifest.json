@@ -1,0 +1,32 @@
+{
+	"name": "alx intranet",
+	"version": "0.0.1",
+	"description": "Alx intranet utils",
+	"manifest_version": 3,
+	"minimum_chrome_version": "100",
+	"permissions": [
+		"storage",
+		"tabs",
+		"activeTab",
+		"declarativeContent"
+	],
+	"background": {
+		"service_worker": "src/background.js"
+	},
+	"action": {
+		"default_title": "ALX Intranet",
+		"default_popup": "popup/popup.html"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"https://intranet.alxswe.com/projects/*"
+			],
+			"js": [
+				"src/content.js"
+			],
+			"run_at": "document_end",
+			"type": "module"
+		}
+	]
+}
