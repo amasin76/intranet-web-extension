@@ -31,8 +31,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 				let fileElements = taskCard.querySelectorAll('li');
 				fileElements.forEach(fileElement => {
 					if (fileElement.textContent.includes('File:')) {
-						let fileName = fileElement.textContent.replace('File:', '').trim();
-						fileNames.push(fileName);
+						let fileText = fileElement.textContent.replace('File:', '').trim();
+						let files = fileText.split(', ');
+						files.forEach(file => {
+							fileNames.push(file.trim());
+						});
 					}
 				});
 			});
@@ -42,7 +45,19 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 		function generateCommandLine(dirName, fileNames) {
 			let commandLine = `mkdir "${dirName}" && cd "${dirName}" && touch README.md `;
-			commandLine += fileNames.join(' ');
+			let subDirs = new Set();
+			fileNames.forEach(fileName => {
+				let parts = fileName.split('/');
+				if (parts.length > 1) {
+					parts.pop();
+					let subDir = parts.join('/');
+					subDirs.add(subDir);
+				}
+			});
+			subDirs.forEach(subDir => {
+				commandLine += ` && mkdir -p "${subDir}"`;
+			});
+			commandLine += ` && touch ${fileNames.join(' ')} `;
 			commandLine += ` && echo "${dirName}" > README.md`;
 			fileNames.forEach(fileName => {
 				if (fileName.endsWith('.py')) {
@@ -51,7 +66,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 				} else if (fileName.endsWith('.js')) {
 					commandLine += ` && echo "#\\!/usr/bin/node" > "${fileName}"`;
 					commandLine += ` && chmod +x "${fileName}"`;
-				} else if (!fileName.includes('.')) {
+				} else if (!fileName.includes('.') && !fileName.endsWith('/')) {
 					commandLine += ` && echo "#\\!/usr/bin/bash" > "${fileName}"`;
 					commandLine += ` && chmod +x "${fileName}"`;
 				}
@@ -72,7 +87,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 		try {
 			let successful = document.execCommand('copy');
 			let msg = successful ? 'Command line copied to clipboard!' : 'Could not copy command line to clipboard';
-			console.log(msg);
 			sendResponse({ success: true })
 		} catch (err) {
 			sendResponse({ success: false })
