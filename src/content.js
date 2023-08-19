@@ -45,7 +45,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 		function generateCommandLine(dirName, fileNames) {
 			let commandLine = `mkdir "${dirName}" && cd "${dirName}" && touch README.md `;
+			let hasPyFiles, hasJsFiles, hasExecutableFiles = false;
 			let subDirs = new Set();
+
 			fileNames.forEach(fileName => {
 				let parts = fileName.split('/');
 				if (parts.length > 1) {
@@ -53,26 +55,28 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 					let subDir = parts.join('/');
 					subDirs.add(subDir);
 				}
+				(fileName.endsWith('.py')) && (hasPyFiles = true);
+				(fileName.endsWith('.js')) && (hasJsFiles = true);
+				(!fileName.includes('.') && !fileName.endsWith('/')) && (hasExecutableFiles = true);
+
 			});
 			subDirs.forEach(subDir => {
 				commandLine += ` && mkdir -p "${subDir}"`;
 			});
 			commandLine += ` && touch ${fileNames.join(' ')} `;
 			commandLine += ` && echo "${dirName}" > README.md`;
-			fileNames.forEach(fileName => {
-				if (fileName.endsWith('.py')) {
-					commandLine += ` && echo "#\\!/usr/bin/python3" > "${fileName}"`;
-					commandLine += ` && chmod +x "${fileName}"`;
-				} else if (fileName.endsWith('.js')) {
-					commandLine += ` && echo "#\\!/usr/bin/node" > "${fileName}"`;
-					commandLine += ` && chmod +x "${fileName}"`;
-				} else if (!fileName.includes('.') && !fileName.endsWith('/')) {
-					commandLine += ` && echo "#\\!/usr/bin/bash" > "${fileName}"`;
-					commandLine += ` && chmod +x "${fileName}"`;
-				}
-			});
+			if (hasPyFiles) {
+				commandLine += ` && find . -name "*.py" -exec sh -c 'echo "#\\!/usr/bin/python3" > "{}" && chmod u+x "{}"' \\;`;
+			}
+			if (hasJsFiles) {
+				commandLine += ` && find . -name "*.js" -exec sh -c 'echo "#\\!/usr/bin/node" > "{}" && chmod u+x "{}"' \\;`;
+			}
+			if (hasExecutableFiles) {
+				commandLine += ` && find . ! -name "*.*" ! -name "README.md" -type f -exec sh -c 'echo "#\\!/usr/bin/bash" > "{}" && chmod u+x "{}"' \\;`;
+			}
 			return commandLine;
 		}
+
 
 		let html = document.documentElement.outerHTML;
 		let { dirName, fileNames } = scrapeFileNames(html);
