@@ -18,4 +18,16 @@ feature, which maps task numbers to the number keys on your keyboard.
 **Checker Control:** Launch all checks at once or select specific checks with the checker 
 control. Also Get feedback on which tasks have failed or succeeded.
 
+## Contributing
+As an open-source project, contributions are welcome and appreciated! If you would like to contribute to the development of this Chrome extension, please kindly follow these steps:
+
+- Clone the repository to your local machine.
+- Create a new branch for your changes.
+- Make your changes and commit them to your branch.
+- Push your changes to the repository on GitHub.
+- Open a pull request from your branch to the main branch.
+
+If you have any questions or need help with the contribution process, feel free to open an issue on the project’s GitHub repository or Discord: Bio#2408
+
+Thank you for considering contributing to this project! Your contributions help make this extension even better for all users.
 
