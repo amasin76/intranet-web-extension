@@ -4,7 +4,7 @@
 	"description": "Enhance your experience of intranet projects/tasks",
 	"manifest_version": 3,
 	"minimum_chrome_version": "100",
-	"icon": {
+	"icons": {
 		"128": "popup/alx_logo.png"
 	},
 	"permissions": [],
