@@ -5,7 +5,7 @@
 	"manifest_version": 3,
 	"minimum_chrome_version": "100",
 	"icons": {
-		"128": "popup/alx_logo.png"
+		"128": "popup/alx_logo.jpg"
 	},
 	"permissions": [],
 	"background": {
