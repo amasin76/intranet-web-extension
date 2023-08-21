@@ -21,11 +21,12 @@ control. Also Get feedback on which tasks have failed or succeeded.
 ## Contributing
 As an open-source project, contributions are welcome and appreciated! If you would like to contribute to the development of this Chrome extension, please kindly follow these steps:
 
-- Clone the repository to your local machine.
+- Fork the repository on GitHub.
+- Clone your forked repository to your local machine.
 - Create a new branch for your changes.
 - Make your changes and commit them to your branch.
-- Push your changes to the repository on GitHub.
-- Open a pull request from your branch to the main branch.
+- Push your changes to your forked repository on GitHub.
+- Open a pull request from your forked repository to the original repository.
 
 If you have any questions or need help with the contribution process, feel free to open an issue on the project’s GitHub repository or Discord: Bio#2408
 
