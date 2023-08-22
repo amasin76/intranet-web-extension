@@ -1,3 +1,13 @@
+function checkUncheckButton(checkbox) {
+	const parentLabel = checkbox.parentElement;
+	if (checkbox.checked) {
+		parentLabel.classList.add('checked');
+		checkbox.checked = true;
+	} else {
+		parentLabel.classList.remove('checked');
+		checkbox.checked = false;
+	}
+}
 document.getElementById('scrape-button').addEventListener('click', () => {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, { action: 'scrapeFileNames' }, function (response) {
@@ -28,20 +38,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				let checkbox = document.createElement('input');
 				checkbox.type = 'checkbox';
 				label.appendChild(checkbox);
-				label.appendChild(document.createTextNode(('Task ' + index)));
+				label.appendChild(document.createTextNode((index)));
 				taskList.appendChild(label);
 				const parentLabel = checkbox.parentElement;
 				parentLabel.classList.add('checked');
 				checkbox.checked = true;
 				checkbox.addEventListener('change', () => {
-					const parentLabel = checkbox.parentElement;
-					if (checkbox.checked) {
-						parentLabel.classList.add('checked');
-						checkbox.checked = true;
-					} else {
-						parentLabel.classList.remove('checked');
-						checkbox.checked = false;
-					};
+					checkUncheckButton(checkbox);
 				});
 			});
 		});
