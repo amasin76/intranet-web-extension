@@ -46,6 +46,19 @@ document.addEventListener('DOMContentLoaded', function () {
 				checkbox.addEventListener('change', () => {
 					checkUncheckButton(checkbox);
 				});
+				const TaskElements = document.querySelectorAll('.task-status');
+				TaskElements.forEach(element => {
+					element.addEventListener('mouseover', () => {
+						if (element.classList.contains('checked')) {
+							element.style.opacity = '0.7';
+						} else {
+							element.style.opacity = '0.5';
+						}
+					});
+					element.addEventListener('mouseout', () => {
+						element.style.opacity = '';
+					});
+				});
 			});
 		});
 	});
