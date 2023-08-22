@@ -37,9 +37,10 @@ hr {
 	font-size: 1.2rem;
 	padding: 5px;
 	border-radius: 5px;
-	width: calc(20% - 10px);
+	width: calc(20%);
 }
 
+/*
 .task-status.green {
 	color: #4CAF50;
 	background-color: rgba(0, 128, 0, 0.2);
@@ -49,13 +50,24 @@ hr {
 	color: #c91b1b;
 	background-color: rgba(255, 0, 0, 0.2);
 }
+*/
 
-input[type="checkbox"] {
-	margin-right: 5px;
+.selects {
+	margin-bottom: 10px;
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-around;
 }
 
-#select-all {
-	margin-bottom: 10px;
+.selects input {
+	display: none;
+}
+
+.select-all input:checked + div,
+.select-none input:checked + div,
+.select-greens input:checked + div,
+.select-reds input:checked + div {
+	font-weight: bolder;
 }
 
 button {
@@ -130,3 +142,47 @@ button:focus {
 		inset -4px -4px6 px0 rgba(255, 255, 255, .2),
 		inset4 px4 px6 px0 rgba(0, 0, 0, .4);
 } */
+
+.task-status.green {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: rgba(0, 128, 0, 0.2);
+	cursor: pointer;
+	user-select: none;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.task-status.green input {
+	display: none;
+}
+
+
+.task-status.green.checked {
+	background-color: #45a049;
+}
+
+.task-status.green:hover {
+	background-color: #45a049;
+}
+
+.task-status.red {
+	display: inline-block;
+	padding: 8px 16px;
+	background-color: rgb(255, 0, 0, 0.2);
+	cursor: pointer;
+	user-select: none;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.task-status.red input {
+	display: none;
+}
+
+
+.task-status.red.checked {
+	background-color: #a04545;
+}
+
+.task-status.red:hover {
+	background-color: #a04545;
+}
