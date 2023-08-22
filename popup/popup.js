@@ -1,3 +1,13 @@
+function checkUncheckButton(checkbox) {
+	const parentLabel = checkbox.parentElement;
+	if (checkbox.checked) {
+		parentLabel.classList.add('checked');
+		checkbox.checked = true;
+	} else {
+		parentLabel.classList.remove('checked');
+		checkbox.checked = false;
+	}
+}
 document.getElementById('scrape-button').addEventListener('click', () => {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, { action: 'scrapeFileNames' }, function (response) {
@@ -27,22 +37,19 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 				let checkbox = document.createElement('input');
 				checkbox.type = 'checkbox';
-				checkbox.checked = true;
 				label.appendChild(checkbox);
 				label.appendChild(document.createTextNode((index)));
 				taskList.appendChild(label);
+				const parentLabel = checkbox.parentElement;
+				parentLabel.classList.add('checked');
+				checkbox.checked = true;
+				checkbox.addEventListener('change', () => {
+					checkUncheckButton(checkbox);
+				});
 			});
 		});
 	});
 
-
-	document.getElementById('select-all').addEventListener('change', function (event) {
-		let checked = event.target.checked;
-		let checkboxes = document.querySelectorAll('#task-list input[type="checkbox"]');
-		checkboxes.forEach(function (checkbox) {
-			checkbox.checked = checked;
-		});
-	});
 
 	document.getElementById('run-script').addEventListener('click', function () {
 		let runScriptButton = document.getElementById('run-script');
@@ -61,4 +68,69 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	});
 
+	document.getElementById('select-all').addEventListener('change', function (event) {
+		let checked = event.target.checked;
+		let checkboxes = document.querySelectorAll('#task-list input[type="checkbox"]');
+		checkboxes.forEach(function (checkbox) {
+			const parentLabel = checkbox.parentElement;
+			parentLabel.classList.add('checked');
+			checkbox.checked = true;
+		});
+	});
+
+	document.getElementById('select-none').addEventListener('change', function (event) {
+		let checked = event.target.checked;
+		let checkboxes = document.querySelectorAll('#task-list input[type="checkbox"]');
+		checkboxes.forEach(function (checkbox) {
+			const parentLabel = checkbox.parentElement;
+			parentLabel.classList.remove('checked');
+			checkbox.checked = false;
+		});
+	});
+
+	document.getElementById('select-greens').addEventListener('change', function (event) {
+		let checkall = document.querySelectorAll('.task-status input[type="checkbox"]');
+		checkall.forEach(function (checkbox) {
+			const parentLabel = checkbox.parentElement;
+			parentLabel.classList.remove('checked');
+			checkbox.checked = false;
+		});
+		let checked = event.target.checked;
+		let checkboxes = document.querySelectorAll('.task-status.green input[type="checkbox"]');
+		checkboxes.forEach(function (checkbox) {
+			const parentLabel = checkbox.parentElement;
+			if (checked) {
+				parentLabel.classList.add('checked');
+				checkbox.checked = true;
+			}
+			else {
+				parentLabel.classList.remove('checked');
+				checkbox.checked = false;
+			}
+		});
+	});
+
+	document.getElementById('select-reds').addEventListener('change', function (event) {
+		let checkall = document.querySelectorAll('.task-status input[type="checkbox"]');
+		checkall.forEach(function (checkbox) {
+			const parentLabel = checkbox.parentElement;
+			parentLabel.classList.remove('checked');
+			checkbox.checked = false;
+		});
+		let checked = event.target.checked;
+		let checkboxes = document.querySelectorAll('.task-status.red input[type="checkbox"]');
+		checkboxes.forEach(function (checkbox) {
+			const parentLabel = checkbox.parentElement;
+			if (checked) {
+				parentLabel.classList.add('checked');
+				checkbox.checked = true;
+			}
+			else {
+				parentLabel.classList.remove('checked');
+				checkbox.checked = false;
+			}
+		});
+	});
 });
+
+

@@ -37,25 +37,25 @@ hr {
 	font-size: 1.2rem;
 	padding: 5px;
 	border-radius: 5px;
-	width: calc(20% - 10px);
+	width: calc(20%);
 }
 
-.task-status.green {
-	color: #4CAF50;
-	background-color: rgba(0, 128, 0, 0.2);
-}
-
-.task-status.red {
-	color: #c91b1b;
-	background-color: rgba(255, 0, 0, 0.2);
-}
-
-input[type="checkbox"] {
-	margin-right: 5px;
-}
-
-#select-all {
+.selects {
 	margin-bottom: 10px;
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.selects input {
+	display: none;
+}
+
+.select-all input:checked + div,
+.select-none input:checked + div,
+.select-greens input:checked + div,
+.select-reds input:checked + div {
+	font-weight: bolder;
 }
 
 button {
@@ -87,46 +87,48 @@ button:focus {
 	box-shadow: rgba(95, 220, 11, 0.7) 0 80px 0px 2px inset;
 }
 
-/* .custom-btn {
-	width: 130px;
-	height: 40px;
-	color: #fff;
-	border-radius: 5px;
-	padding: 10px 25px;
-	font-family: 'Lato', sans-serif;
-	font-weight: 500;
-	background: transparent;
-	cursor: pointer;
-	transition: all 0.3s ease;
-	position: relative;
+.task-status.green {
 	display: inline-block;
-	box-shadow:
-		inset 2px 2px 2px 0 rgba(255, 255, 255, .5),
-		7px 7px 20px 0 rgba(0, 0, 0, .1),
-		4px 4px 5px 0 rgba(0, 0, 0, .1);
-	outline: none;
+	padding: 8px 3px;
+	background-color: rgba(0, 128, 0, 0.2);
+	cursor: pointer;
+	user-select: none;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+	text-align: center;
 }
 
-.btn-2 {
-	background:
-		rgb(96, 9, 240);
-	background:
-		linear-gradient(0deg,
-			rgba(96, 9, 240, 1) 0%,
-			rgba(129, 5, 240, 1)100%);
-	border: none;
-
+.task-status.green input {
+	display: none;
 }
 
-.btn-2:before {
-	height: 0%;
-	width: 2px;
+
+.task-status.green.checked {
+	background-color: #45a049;
 }
 
-.btn-2:hover {
-	box-shadow:
-		4px 4px 6px 0 rgba(255, 255, 255, .5),
-		-4px -4px 6px 0 rgba(116, 125, 136, .5),
-		inset -4px -4px6 px0 rgba(255, 255, 255, .2),
-		inset4 px4 px6 px0 rgba(0, 0, 0, .4);
-} */
+.task-status.green:hover {
+	background-color: #45a049;
+}
+
+.task-status.red {
+	display: inline-block;
+	padding: 8px 3px;
+	background-color: rgb(255, 0, 0, 0.2);
+	cursor: pointer;
+	user-select: none;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+	text-align: center;
+}
+
+.task-status.red input {
+	display: none;
+}
+
+
+.task-status.red.checked {
+	background-color: #a04545;
+}
+
+.task-status.red:hover {
+	background-color: #a04545;
+}

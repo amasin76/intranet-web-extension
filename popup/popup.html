@@ -11,7 +11,12 @@
 	<button id="scrape-button" class="slide">copy cmd</button>
 	<h1 class="checker">Checker</h1>
 	<hr />
-	<label id="select-all"><input type="checkbox" checked>Select All</label>
+	<div class="selects">
+		<label class="select-all" id="select-all"><input type="radio" name='select' checked><div>Select All</div></label>
+		<label class="select-none" id="select-none"><input type="radio" name='select'><div>Select None</div></label>
+		<label class="select-greens" id="select-greens"><input type="radio" name='select'><div>Select Done</div></label>
+		<label class="select-reds" id="select-reds"><input type="radio" name='select'><div>Select Failed</div></label>
+	</div>
 	<div id="task-list"></div>
 	<button id="run-script" class="slide">Run Checker</button>
 </body>
