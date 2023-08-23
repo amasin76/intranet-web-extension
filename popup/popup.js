@@ -50,9 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				label.appendChild(spinnerSpan);
 				label.appendChild(textSpan);
 				taskList.appendChild(label);
-				const parentLabel = checkbox.parentElement;
-				parentLabel.classList.add('checked');
-				checkbox.checked = true;
 				checkbox.addEventListener('change', () => {
 					checkUncheckButton(checkbox);
 				});
