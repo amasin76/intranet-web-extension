@@ -83,10 +83,17 @@ browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 		let commandLine = generateCommandLine(dirName, fileNames);
 
 		let textarea = document.createElement('textarea');
+		// alert(commandLine);
 		textarea.textContent = commandLine;
 		document.body.appendChild(textarea);
 
 		textarea.select();
+
+		function delay(ms) {
+			return new Promise(resolve => {
+			  setTimeout(resolve, ms);
+			});
+		}
 
 		try {
 			let successful = document.execCommand('copy');
@@ -96,24 +103,6 @@ browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 			sendResponse({ success: false })
 			console.error('Could not copy command line to clipboard: ', err);
 		}
-		//+++++++++++++++++++++++++++
-		// try {
-		// 	let textToCopy = commandLine; // Replace with the actual command line text
-			
-		// 	navigator.clipboard.writeText(textToCopy)
-		// 	  .then(() => {
-		// 		console.log('Command line copied to clipboard!');
-		// 		sendResponse({ success: true });
-		// 	  })
-		// 	  .catch((err) => {
-		// 		console.error('Could not copy command line to clipboard: ', err);
-		// 		sendResponse({ success: false });
-		// 	  });
-		//   } catch (err) {
-		// 	console.error('Could not copy command line to clipboard: ', err);
-		// 	sendResponse({ success: false });
-		//   }
-		//+++++++++++++++++++++++++++
 
 		document.body.removeChild(textarea);
 	}

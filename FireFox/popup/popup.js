@@ -8,7 +8,7 @@ function checkUncheckButton(checkbox) {
 		checkbox.checked = false;
 	}
 }
-document.getElementById('scrape-button').addEventListener('click', () => {
+document.querySelector('#scrape-button').addEventListener('click', () => {
 	browser.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		browser.tabs.sendMessage(tabs[0].id, { action: 'scrapeFileNames' }, function (response) {
 			let scrapeButton = document.getElementById('scrape-button');
