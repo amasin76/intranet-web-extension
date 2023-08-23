@@ -106,7 +106,7 @@ button:focus {
 
 
 .task-status.green.checked {
-	background-color: #05fa10;
+	background-color: #45a049;
 }
 
 
@@ -120,5 +120,5 @@ button:focus {
 
 
 .task-status.red.checked {
-	background-color: #8f0101;
+	background-color: #a04545;
 }
