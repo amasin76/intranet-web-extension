@@ -135,6 +135,9 @@ chrome.runtime.onMessage.addListener(
 				// get the corresponding task ID using the data-task-id attribute
 				let taskId = spinner.parentElement.querySelector('.correction_request_test_send').getAttribute('data-task-id');
 
+				// check if an observer already exists for this taskId
+				if (observers[taskId]) return;
+
 				// create a MutationObserver to watch for changes in the style attribute of the spinner element
 				let observer = new MutationObserver(function (mutations) {
 					mutations.forEach(function (mutation) {
@@ -156,7 +159,7 @@ chrome.runtime.onMessage.addListener(
 								}, 1000);
 
 								// disconnect the observer
-								observer.disconnect();
+								// observer.disconnect();
 							}
 						}
 					});

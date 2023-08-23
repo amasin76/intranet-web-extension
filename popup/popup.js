@@ -39,11 +39,16 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 				let checkbox = document.createElement('input');
 				checkbox.type = 'checkbox';
-				let span = document.createElement('span');
-				span.classList.add('spinner');
+				let spinnerSpan = document.createElement('span');
+				spinnerSpan.classList.add('spinner');
+				// create a new span element to display the task number and feedback text
+				let textSpan = document.createElement('span');
+				textSpan.classList.add('task-index');
+				textSpan.textContent = index;
+
 				label.appendChild(checkbox);
-				label.appendChild(span);
-				label.appendChild(document.createTextNode((index)));
+				label.appendChild(spinnerSpan);
+				label.appendChild(textSpan);
 				taskList.appendChild(label);
 				const parentLabel = checkbox.parentElement;
 				parentLabel.classList.add('checked');
@@ -71,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	document.getElementById('run-script').addEventListener('click', function () {
 		let runScriptButton = document.getElementById('run-script');
-		runScriptButton.textContent = 'Running...';
 		let checkboxes = document.querySelectorAll('#task-list input[type="checkbox"]');
 		let taskIndices = [];
 		checkboxes.forEach(function (checkbox, index) {
@@ -83,9 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		});
 		chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, { message: "run_script", taskIndices: taskIndices }, function (response) {
-				runScriptButton.textContent = 'Run Script';
-			});
+			chrome.tabs.sendMessage(tabs[0].id, { message: "run_script", taskIndices: taskIndices }, function (response) { });
 			// send a create_observers message to create the MutationObserver instances
 			chrome.tabs.sendMessage(tabs[0].id, { message: "create_observers" }, function (response) { });
 		});
@@ -157,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		if (request.message === 'spinner_hidden') {
-			let hasTaskPassed = false
+			let hasTaskPassed = false;
 			let taskId = request.taskId;
 			let label = document.querySelector(`label[data-task-id="${taskId}"]`);
 			let checkbox = label.querySelector('input[type="checkbox"]');
@@ -166,22 +168,26 @@ document.addEventListener('DOMContentLoaded', function () {
 			label.classList.remove('running');
 			label.classList.remove('checked');
 			checkbox.checked = false;
-			console.log(studentTaskDoneElement.classList)
 			if (studentTaskDoneElement.classList.contains('yes')) {
 				label.classList.add('green');
 				label.classList.remove('red');
-				hasTaskPassed = true
+				hasTaskPassed = true;
 			} else {
-				console.log("fail task")
 				label.classList.add('red');
 				label.classList.remove('green');
 			}
 
-			// display temporary feedback text
-			let originalText = label.textContent;
-			label.textContent = hasTaskPassed ? 'OK' : 'X';
+			// get the textSpan element
+			let textSpan = label.querySelector('.task-index');
+			// update the text of the textSpan element to show temp feedback
+			let originalText = textSpan.textContent;
+			textSpan.textContent = hasTaskPassed ? 'OK' : 'X';
+
+			console.log(`originalText: ${originalText}`); // log the original text
+
 			setTimeout(function () {
-				label.textContent = originalText;
+				console.log('setTimeout called'); // log when the setTimeout function is called
+				textSpan.textContent = originalText;
 			}, 1000);
 		}
 	});
