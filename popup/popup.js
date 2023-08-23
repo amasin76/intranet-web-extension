@@ -26,10 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, { message: "get_task_status" }, function (response) {
 			let taskStatus = response.taskStatus;
+			let taskIds = response.taskIds;
 			let taskList = document.getElementById('task-list');
 			taskStatus.forEach(function (status, index) {
 				let label = document.createElement('label');
 				label.classList.add('task-status');
+				label.setAttribute('data-task-id', taskIds[index]);
 				if (status === 'yes') {
 					label.classList.add('green');
 				} else if (status === 'no') {
@@ -37,7 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 				let checkbox = document.createElement('input');
 				checkbox.type = 'checkbox';
+				let span = document.createElement('span');
+				span.classList.add('spinner');
 				label.appendChild(checkbox);
+				label.appendChild(span);
 				label.appendChild(document.createTextNode((index)));
 				taskList.appendChild(label);
 				const parentLabel = checkbox.parentElement;
@@ -70,14 +75,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		let checkboxes = document.querySelectorAll('#task-list input[type="checkbox"]');
 		let taskIndices = [];
 		checkboxes.forEach(function (checkbox, index) {
-			if (checkbox.checked) {
+			const parentLabel = checkbox.parentElement;
+			if (checkbox.checked && !parentLabel.classList.contains('running')) {
 				taskIndices.push(index);
+				parentLabel.classList.add('running');
 			}
+
 		});
 		chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 			chrome.tabs.sendMessage(tabs[0].id, { message: "run_script", taskIndices: taskIndices }, function (response) {
 				runScriptButton.textContent = 'Run Script';
 			});
+			// send a create_observers message to create the MutationObserver instances
+			chrome.tabs.sendMessage(tabs[0].id, { message: "create_observers" }, function (response) { });
 		});
 	});
 
@@ -144,6 +154,38 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	});
+
+	chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+		if (request.message === 'spinner_hidden') {
+			let hasTaskPassed = false
+			let taskId = request.taskId;
+			let label = document.querySelector(`label[data-task-id="${taskId}"]`);
+			let checkbox = label.querySelector('input[type="checkbox"]');
+			let studentTaskDoneElement = new DOMParser().parseFromString(request.studentTaskDoneElement, 'text/html').body.firstChild;
+
+			label.classList.remove('running');
+			label.classList.remove('checked');
+			checkbox.checked = false;
+			console.log(studentTaskDoneElement.classList)
+			if (studentTaskDoneElement.classList.contains('yes')) {
+				label.classList.add('green');
+				label.classList.remove('red');
+				hasTaskPassed = true
+			} else {
+				console.log("fail task")
+				label.classList.add('red');
+				label.classList.remove('green');
+			}
+
+			// display temporary feedback text
+			let originalText = label.textContent;
+			label.textContent = hasTaskPassed ? 'OK' : 'X';
+			setTimeout(function () {
+				label.textContent = originalText;
+			}, 1000);
+		}
+	});
+
 });
 
 

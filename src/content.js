@@ -101,11 +101,13 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 	}
 });
 
+let observers = {};
 chrome.runtime.onMessage.addListener(
 	function (request, sender, sendResponse) {
+		let buttons = document.querySelectorAll('.student_task_done');
 		if (request.message === "get_task_status") {
-			let buttons = document.querySelectorAll('.student_task_done');
 			let taskStatus = [];
+			let taskIds = [];
 			buttons.forEach(function (button) {
 				if (button.classList.contains('yes')) {
 					taskStatus.push('yes');
@@ -114,14 +116,59 @@ chrome.runtime.onMessage.addListener(
 				} else {
 					taskStatus.push('default');
 				}
+				taskIds.push(button.getAttribute('data-task-id'));
 			});
-			sendResponse({ taskStatus: taskStatus });
+			sendResponse({ taskStatus: taskStatus, taskIds: taskIds });
 		} else if (request.message === "run_script") {
 			let taskIndices = request.taskIndices;
 			let buttons = document.querySelectorAll('.correction_request_test_send');
 			taskIndices.forEach(function (index) {
 				buttons[index].click();
 			});
+			sendResponse({ success: true });
+		} else if (request.message === "create_observers") {
+			// get all spinner elements
+			let spinners = document.querySelectorAll('.task_correction_modal .spinner');
+
+			// iterate over each spinner element
+			spinners.forEach(function (spinner) {
+				// get the corresponding task ID using the data-task-id attribute
+				let taskId = spinner.parentElement.querySelector('.correction_request_test_send').getAttribute('data-task-id');
+
+				// create a MutationObserver to watch for changes in the style attribute of the spinner element
+				let observer = new MutationObserver(function (mutations) {
+					mutations.forEach(function (mutation) {
+						if (mutation.attributeName === 'style') {
+							let displayValue = spinner.style.display;
+							if (displayValue === 'none') {
+
+								// add a delay before querying the student_task_done element
+								setTimeout(function () {
+									// get the corresponding student_task_done element
+									let studentTaskDoneElement = document.querySelector(`.student_task_done[data-task-id="${taskId}"]`);
+
+									// send a message to the popup script to notify it that the spinner has been hidden
+									chrome.runtime.sendMessage({
+										message: 'spinner_hidden',
+										taskId: taskId,
+										studentTaskDoneElement: studentTaskDoneElement.outerHTML
+									});
+								}, 1000);
+
+								// disconnect the observer
+								observer.disconnect();
+							}
+						}
+					});
+				});
+
+				// start observing the spinner element
+				observer.observe(spinner, { attributes: true });
+
+				// store the observer in the observers object using the task ID as the key
+				observers[taskId] = observer;
+			});
+
 			sendResponse({ success: true });
 		}
 	}
