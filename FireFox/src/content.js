@@ -66,13 +66,13 @@ browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 			commandLine += ` && touch ${fileNames.join(' ')} `;
 			commandLine += ` && echo "${dirName}" > README.md`;
 			if (hasPyFiles) {
-				commandLine += ` && find . -name "*.py" -exec sh -c 'echo "#\\!/usr/bin/python3" > "{}" && chmod u+x "{}"' \\;`;
+				commandLine += ` && find . -name "*.py" -exec sh -c 'echo "#!/usr/bin/python3" > "{}" && chmod u+x "{}"' \\;`;
 			}
 			if (hasJsFiles) {
-				commandLine += ` && find . -name "*.js" -exec sh -c 'echo "#\\!/usr/bin/node" > "{}" && chmod u+x "{}"' \\;`;
+				commandLine += ` && find . -name "*.js" -exec sh -c 'echo "#!/usr/bin/node" > "{}" && chmod u+x "{}"' \\;`;
 			}
 			if (hasExecutableFiles) {
-				commandLine += ` && find . ! -name "*.*" ! -name "README.md" -type f -exec sh -c 'echo "#\\!/usr/bin/bash" > "{}" && chmod u+x "{}"' \\;`;
+				commandLine += ` && find . ! -name "*.*" ! -name "README.md" -type f -exec sh -c 'echo "#!/usr/bin/bash" > "{}" && chmod u+x "{}"' \\;`;
 			}
 			return commandLine;
 		}
