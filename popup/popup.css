@@ -16,35 +16,54 @@ body {
 
 .cadre {
   width: 100%;
-  height: 50px;
+  height: 30px;
   /* background-color: #ccc; */
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 .cadre .progress {
-  background-color: var(--red-color);
+  background-color: rgb(255, 0, 0, 0.2);
   height: 10px;
-  width: 150px;
+  width: 100%;
   border-radius: 5px;
 }
 .cadre .progress .value {
+  /* position: relative; */
   height: 100%;
   width: 0%;
-  background-color: var(--green-color);
+  background-color: rgb(20 67 20);
   border-radius: 5px;
+  z-index: 99;
 }
+/* .cadre .progress .value::before {
+  content: "xxx";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #222;
+  opacity: 60%;
+  border-radius: 5px;
+  z-index: -1;
+} */
 
 #percente_number {
   font-weight: 600;
   font-size: 20px;
   color: var(--green-color);
+  /* display: none; */
 }
 
+.title_checker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 h1 {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: auto;
+  margin-top: auto;
 }
 
 hr {
@@ -88,7 +107,7 @@ hr {
 .select-reds input:checked + div {
   font-size: 14px;
   font-weight: bolder;
-  border-bottom: 2px solid rgb(68, 68, 226);
+  /* border-bottom: 2px solid rgb(68, 68, 226); */
 }
 
 :is(.select-all, .select-none, .select-greens, .select-reds) {
@@ -104,7 +123,8 @@ button {
   margin: 0.5em;
   padding: 1em 2em;
   color: #4caf50;
-  transition: 0.25s;
+  transition: 0.25s ease-out;
+  cursor: pointer;
 }
 
 .error {
@@ -123,8 +143,10 @@ button:focus {
 .slide:focus {
   box-shadow: rgba(95, 220, 11, 0.7) 0 80px 0px 2px inset;
 }
+
 .task-status {
   display: inline-block;
+  position: relative;
   padding: 8px 3px;
   background-color: rgba(0, 128, 0, 0.2);
   cursor: pointer;
@@ -133,6 +155,7 @@ button:focus {
   transition: background-color 0.2s, color 0.2s, border-color 0.2s,
     opacity 0.3s ease;
 }
+
 .task-status.green {
   background-color: rgba(0, 128, 0, 0.2);
 }
@@ -155,4 +178,31 @@ button:focus {
 
 .task-status.red.checked {
   background-color: #a04545;
+}
+
+.spinner {
+  display: none;
+  width: 25px;
+  height: 25px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: rgb(238, 238, 238, 0.3);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.task-status.running {
+  cursor: not-allowed;
+}
+
+.task-status.running .spinner {
+  display: inline-block;
+  position: absolute;
+  top: 12%;
+  right: 26%;
 }
