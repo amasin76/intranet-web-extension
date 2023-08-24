@@ -1,8 +1,8 @@
-#  💫 Intranet Projects Extension 💫 
-<p align="center"> <img src="https://i.imgur.com/0tzT2sG.png" alt="preview" /> </p>
+#  💫 ALX Intranet Extension 💫 
+<div align="center"> <img src="https://github.com/nuuxcode/intranet-chrome-extension/assets/24565896/b2577ca8-9868-473e-ba44-96f8334ca45e" alt="Preview"> </div>
+<p>
 Tutorial Video: https://youtu.be/WxMfN6YxmDs 
-<br />
-<br />
+</p>
 Enhance your experience of intranet projects using this Chrome extension. The extension provides
 several features to make your intranet experience smooth and efficient:
 
@@ -55,4 +55,3 @@ As an open-source project, contributions are welcome and appreciated! If you wou
 If you have any questions or need help with the contribution process, feel free to open an issue on the project’s GitHub repository or Discord: Bio#2408
 
 Thank you for considering contributing to this project! Your contributions help make this extension even better for all users.
-
