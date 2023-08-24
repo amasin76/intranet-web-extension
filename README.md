@@ -1,5 +1,5 @@
 #  💫 ALX Intranet Extension 💫 
-<img src="https://github.com/nuuxcode/intranet-chrome-extension/assets/24565896/b2577ca8-9868-473e-ba44-96f8334ca45e" alt="Preview">
+<div align="center"> <img src="https://github.com/nuuxcode/intranet-chrome-extension/assets/24565896/b2577ca8-9868-473e-ba44-96f8334ca45e" alt="Preview"> </div>
 <p>
 Tutorial Video: https://youtu.be/WxMfN6YxmDs 
 </p>
