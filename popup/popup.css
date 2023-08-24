@@ -152,3 +152,14 @@ button:focus {
 	top: 12%;
 	right: 26%;
 }
+
+.github {
+	text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.github a {
+	color:white;
+}
