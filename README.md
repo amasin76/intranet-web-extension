@@ -1,7 +1,5 @@
-#  💫 Intranet Projects Extension 💫 
-<div style="display:flex;justify-content:center">
-![ezgif-4-2adb581444](https://github.com/nuuxcode/intranet-chrome-extension/assets/24565896/b2577ca8-9868-473e-ba44-96f8334ca45e) 
-</div>
+#  💫 ALX Intranet Extension 💫 
+<img src="https://github.com/nuuxcode/intranet-chrome-extension/assets/24565896/b2577ca8-9868-473e-ba44-96f8334ca45e" alt="Preview">
 <p>
 Tutorial Video: https://youtu.be/WxMfN6YxmDs 
 </p>
