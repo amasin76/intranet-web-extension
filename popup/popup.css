@@ -155,11 +155,11 @@ button:focus {
 
 .github {
 	text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+	width: 100%;
+	padding: 10px 0;
+	margin: 0;
 }
 
 .github a {
-	color:white;
+	color: white;
 }
