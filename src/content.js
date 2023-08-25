@@ -44,7 +44,7 @@ if (errorDiv) {
 
 let taskNum = '';
 document.addEventListener('keydown', function (event) {
-	if (event.keyCode >= 48 && event.keyCode <= 57) {
+	if (event.keyCode >= 48 && event.keyCode <= 57 && !event.ctrlKey) {
 		if (event.shiftKey && taskNum.length < 2) {
 			taskNum += String.fromCharCode(event.keyCode);
 		} else {
@@ -58,8 +58,10 @@ document.addEventListener('keydown', function (event) {
 });
 
 document.addEventListener('keyup', function (event) {
-	if (event.keyCode === 16) taskNum = '';
-	if (event.keyCode >= 48 && event.keyCode <= 57 && !event.shiftKey) taskNum = '';
+	if (!event.ctrlKey) {
+		if (event.keyCode === 16) taskNum = '';
+		if (event.keyCode >= 48 && event.keyCode <= 57 && !event.shiftKey) taskNum = '';
+	}
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
