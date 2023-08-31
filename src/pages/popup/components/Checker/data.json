@@ -1,0 +1,28 @@
+[
+	{
+	  "className": "select-all",
+	  "id": "select-all",
+	  "name": "select",
+	  "label": "All"
+	},
+	{
+	  "className": "select-none",
+	  "id": "select-none",
+	  "name": "select",
+	  "label": "None",
+	  "defaultChecked": true
+	},
+	{
+	  "className": "select-greens",
+	  "id": "select-greens",
+	  "name": "select",
+	  "label": "Done"
+	},
+	{
+	  "className": "select-reds",
+	  "id": "select-reds",
+	  "name": "select",
+	  "label": "Failed"
+	}
+  ]
+  
