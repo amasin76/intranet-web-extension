@@ -1,0 +1,24 @@
+.filter-btn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+
+	.badge {
+		display: inline-block;
+		position: absolute;
+		top: -4px;
+		right: -18px;
+		min-width: 10px;
+		padding: 3px 7px;
+		font-size: 13px;
+		font-weight: bold;
+		line-height: 1;
+		color: #ffffffac;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: middle;
+		background-color: #77777730;
+		border-radius: 50%;
+	}
+}
