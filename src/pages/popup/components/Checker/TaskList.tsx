@@ -1,5 +1,4 @@
-// TaskList.tsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useData } from "../../context/DataContext";
 
 interface TaskListProps {
@@ -10,7 +9,7 @@ export const TaskList: React.FC<TaskListProps> = ({ onCheck }) => {
 	const { tasks, checkedTasks, setCheckedTasks, runningTasks, setRunningTasks, setTaskStatus } = useData();
 	const [finishedTasks, setFinishedTasks] = useState<string[]>([]);
 
-	const handleFinishedTasks = (request: any) => {
+	const handleFinishedTasks = useCallback((request: any) => {
 		if (request.message === "task_finished") {
 			const { taskId, taskStatus } = request;
 
@@ -28,7 +27,7 @@ export const TaskList: React.FC<TaskListProps> = ({ onCheck }) => {
 				setFinishedTasks((prevFinishedTasks) => prevFinishedTasks.filter((id) => id !== taskId));
 			}, 2000);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
 		chrome.runtime.onMessage.addListener(handleFinishedTasks);
