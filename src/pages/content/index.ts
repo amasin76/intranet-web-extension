@@ -1,10 +1,13 @@
 import getTaskData from "./getTaskData";
+import easyQuiz from "./easyQuiz";
 import runCheckedTasks from "./runCheckedTasks";
 import scrollToTask from "./scrollToTask";
 import copyCmdFiles from "./scrapeFilesNames";
 import checkerRunning from "./checkerRunning";
 import { setBtnCollapseTask, collapseTasksSuccess, collapseTasksFail } from "./collapseTasks";
 
+// Quizz Button Floating
+easyQuiz();
 // Hotkeys
 scrollToTask();
 // Create collapse tasks button
