@@ -3,18 +3,19 @@ import { SelectionFilter } from "./SelectionFilter";
 import { TaskList } from "./TaskList";
 import { sendMessageToContent } from "@root/src/shared/utils/messages";
 import { useData } from "../../context/DataContext";
+import Tooltip from "@src/shared/components/Tooltip";
+import InfoButton from "@src/shared/components/InfoButton";
 import "./index.scss";
 
 export const Checker: React.FC = () => {
-	const { tasks, setTasks, checkedTasks, handleCheck, runningTasks, setRunningTasks } = useData();
+	const { setTasks, checkedTasks, handleCheck, runningTasks, setRunningTasks } = useData();
 
 	useEffect(() => {
 		sendMessageToContent({ message: "get-task-status" }, (response) => {
-			const taskStatus = response.taskStatus;
-			const taskIds = response.taskIds;
-			const tasks = taskIds.map((taskId, index) => ({
+			const { taskStatus, taskIds } = response;
+			const tasks = taskIds.map((taskId: string, idx: number) => ({
 				taskId,
-				status: taskStatus[index],
+				status: taskStatus[idx],
 			}));
 			setTasks(tasks);
 		});
@@ -31,7 +32,12 @@ export const Checker: React.FC = () => {
 	return (
 		<div className="checker">
 			<div className="checker--title">
-				<h1 className="checker">Checker</h1>
+				<div className="icon-text">
+					<h1 className="checker">Checker</h1>
+					<Tooltip text="Please try to keep servers healthy 💚 by only running the checks you need">
+						<InfoButton />
+					</Tooltip>
+				</div>
 				<button id="run-checker" className="slide" onClick={runChecker}>
 					Run
 				</button>
