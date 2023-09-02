@@ -1,0 +1,35 @@
+*[data-tooltip] {
+	position: relative;
+	display: inline-block;
+}
+
+*[data-tooltip]::before {
+	content: attr(data-tooltip);
+	position: absolute;
+	bottom: 0px;
+	left: 50%;
+	transform: translate(-50%, 100%);
+	width: max-content;
+	max-width: 16rem;
+
+	font-size: 14px;
+	line-height: 1.2rem;
+	text-align: center;
+	background-color: #333;
+	color: #fff;
+
+	padding: 5px 0;
+	border-radius: 0.25rem;
+	box-shadow: 1px 5px 20px 0px rgba(10, 10, 10, 0.7);
+
+	opacity: 0;
+	transition: opacity 0.3s;
+	z-index: 1;
+
+	user-select: none;
+	pointer-events: none;
+}
+
+*[data-tooltip]:hover::before {
+	opacity: 1;
+}
