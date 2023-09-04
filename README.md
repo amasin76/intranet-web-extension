@@ -1,8 +1,8 @@
 # 💫 ALX Intranet Extension 💫
-<hr />
-<div align="center"> <img src="https://github.com/nuuxcode/intranet-chrome-extension/assets/24565896/b2577ca8-9868-473e-ba44-96f8334ca45e" alt="Preview"> </div>
 <p align="center"> <a rel="noreferrer noopener" target="_blank" href="https://chrome.google.com/webstore/detail/alx-intranet/eagnmhadjdelkimfjbelmndejpepgmef/"><img alt="Chrome Web Store" src="https://img.shields.io/badge/Chrome-141e24.svg?&style=for-the-badge&logo=google-chrome&logoColor=white"></a></p>
 <p>
+<div align="center"> <img src="https://i.imgur.com/8hmgGKr.png" alt="Preview"> </div>
+<p align="center"><sub>(Screenshot from v0.2.2)</sub></p> <br />
 Tutorial Video (arabic / darija): https://youtu.be/WxMfN6YxmDs 
 </p>
 Enhance your experience of intranet projects using this Chrome extension.  <br />
@@ -27,8 +27,8 @@ Select checks you want to run. Also Get feedback on which tasks have failed or s
 You dont have any more keep scroll down and up to correct you ansewrs,
 allows you to easily review and change your responses
 
-**Collapse Tasks:**  
-allows to collapse individual tasks or all successful/failed tasks at once
+**Collapse Tasks:**  (beta)
+Allows to collapse individual tasks or all successful/failed tasks at once
 
 ## 🧩 Installation
 
@@ -45,14 +45,31 @@ There are several ways to install the extension:
 ## ⚙️ Usage
 
 - **Initial Files and Directories:**  
-  click `[Tasks]` button, and paste the command in your terminal, then click Enter
+  Click `[Tasks]` button, and paste the command in your terminal, then click Enter
 - **Task Navigation:**  
   Press the number keys on your keyboard to navigate to the corresponding task.
   For example, pressing the 1 key will scroll the page to task 1.<br />
   To navigate to a task with a two-digit number, hold down the Shift key while pressing the number keys.
   For example, to navigate to task number 12, hold down the Shift key and press the 1 key followed by the 2 key.
 - **Checker Control**, **Easy Quiz**, **Collapse Tasks:**  
-  the user interface is simple and self-explanatory
+  The user interface is simple and self-explanatory
+
+## 🛡️ Privacy and Policies
+
+### Privacy
+
+- Our extension is designed to be offline-first, meaning that it does not rely on any external servers or backdoors. The extension is also open source, so you can verify its code and functionality for yourself.
+
+- We do not collect any personal data from our users. The only data we have access to is provided by Google Analytics, which shows us information such as the number of installs and uninstalls.
+
+### Policies
+
+- The purpose of our extension is to improve the user experience on the intranet. It is not intended to help users break any rules or engage in activities such as cheating.
+
+- If someone from the staff of the ALX SE notices something that is not in line with their rules, they can contact us and we will take appropriate action.
+
+We are committed to providing a safe and enjoyable experience for all users.
+
 
 ## ❤️ Contributing
 
