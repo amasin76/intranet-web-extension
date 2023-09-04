@@ -5,15 +5,14 @@ import scrollToTask from "./scrollToTask";
 import copyCmdFiles from "./scrapeFilesNames";
 import checkerRunning from "./checkerRunning";
 import { LocalStorage } from "@src/shared/storages/localStorage";
-import { toggleCollapseTasks } from "./collapseTasks";
+import { setBtnCollapseTask, toggleCollapseTasks } from "./collapseTasks";
 
 // Quizz Button Floating
 easyQuiz();
 // Hotkeys
 scrollToTask();
-
-// FIX: conflict with auto collapse
-// setBtnCollapseTask();
+// set collapse button for each task
+setBtnCollapseTask();
 
 // Auto collapse tasks based user prefrenaces
 const localStorage = new LocalStorage();

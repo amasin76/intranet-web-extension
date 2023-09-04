@@ -2,6 +2,8 @@ import { sendMessageToContent } from "@root/src/shared/utils/messages";
 import Switch from "@src/shared/components/Switch";
 import useStorage from "@src/shared/hooks/useStorage";
 import collapseStorage from "@src/shared/storages/collapseStorage";
+import Tooltip from "@src/shared/components/Tooltip";
+import InfoButton from "@src/shared/components/InfoButton";
 import "./index.scss";
 
 export const Collapse: React.FC = () => {
@@ -37,7 +39,12 @@ export const Collapse: React.FC = () => {
 
 	return (
 		<div className="collapse">
-			<h1>Collapse</h1>
+			<div className="icon-text">
+				<h1>Collapse</h1>
+				<Tooltip text="Tasks auto-collapse on success/failure except those collapsed individually">
+					<InfoButton />
+				</Tooltip>
+			</div>
 			<hr />
 			<div className="btn-grp">
 				<h2>Tasks</h2>
