@@ -1,36 +1,38 @@
-import { useState } from "react";
 import { sendMessageToContent } from "@root/src/shared/utils/messages";
+import Switch from "@src/shared/components/Switch";
+import useStorage from "@src/shared/hooks/useStorage";
+import collapseStorage from "@src/shared/storages/collapseStorage";
 import "./index.scss";
 
 export const Collapse: React.FC = () => {
-	const [collapseAll, setCollapseAll] = useState(false);
-	const [collapseSuccess, setCollapseSuccess] = useState(false);
-	const [collapseFail, setCollapseFail] = useState(false);
-
-	const handleCollapseAll = () => {
-		sendMessageToContent({ message: "collapse-tasks-all" }, (response) => {
-			if (response && response.success) {
-				setCollapseAll((prevCollapseAll) => !prevCollapseAll);
-			}
-		});
-	};
+	const { collapseSuccess, collapseFail } = useStorage(collapseStorage);
 
 	const handleCollapseSuccess = () => {
-		sendMessageToContent({ message: "collapse-tasks-success" }, (response) => {
-			if (response && response.success) {
-				setCollapseAll(false);
-				setCollapseSuccess((prevCollapseSuccess) => !prevCollapseSuccess);
+		sendMessageToContent(
+			{ message: `collapse-tasks`, collapseSuccess: !collapseSuccess, collapseFail },
+			(response) => {
+				if (response && response.success) {
+					collapseStorage.set((prevState) => ({
+						...prevState,
+						collapseSuccess: !prevState.collapseSuccess,
+					}));
+				}
 			}
-		});
+		);
 	};
 
 	const handleCollapseFail = () => {
-		sendMessageToContent({ message: "collapse-tasks-fail" }, (response) => {
-			if (response && response.success) {
-				setCollapseAll(false);
-				setCollapseFail((prevCollapseFail) => !prevCollapseFail);
+		sendMessageToContent(
+			{ message: `collapse-tasks`, collapseSuccess, collapseFail: !collapseFail },
+			(response) => {
+				if (response && response.success) {
+					collapseStorage.set((prevState) => ({
+						...prevState,
+						collapseFail: !prevState.collapseFail,
+					}));
+				}
 			}
-		});
+		);
 	};
 
 	return (
@@ -38,16 +40,15 @@ export const Collapse: React.FC = () => {
 			<h1>Collapse</h1>
 			<hr />
 			<div className="btn-grp">
-				{/* // FIX: opposite state
-				<button className="slide" onClick={handleCollapseAll}>
-					All
-				</button> */}
-				<button className="slide" onClick={handleCollapseSuccess}>
+				<h2>Tasks</h2>
+				<label>
 					Done
-				</button>
-				<button className="slide" onClick={handleCollapseFail}>
+					<Switch checked={collapseSuccess} onChange={handleCollapseSuccess} />
+				</label>
+				<label>
 					Fail
-				</button>
+					<Switch checked={collapseFail} onChange={handleCollapseFail} />
+				</label>
 			</div>
 		</div>
 	);

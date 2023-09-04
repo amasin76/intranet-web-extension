@@ -1,6 +1,22 @@
 .collapse {
-	button {
-		font-size: 1rem;
-		padding: 0.6rem 1.4rem;
+	.btn-grp {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		padding-bottom: 0.5rem;
+
+		h2 {
+			margin: 0;
+		}
+
+		label {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
 	}
 }
