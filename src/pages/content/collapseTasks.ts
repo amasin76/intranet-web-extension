@@ -1,9 +1,8 @@
 const collapseButtonStyles = {
-	position: "absolute",
-	right: "13%",
 	"font-size": "1.25rem",
 	outline: "none",
 	opacity: "0.4",
+	width: "2rem",
 };
 
 const setBtnCollapseTask = (): void => {
@@ -14,8 +13,14 @@ const setBtnCollapseTask = (): void => {
 	taskCards.forEach((taskCard) => {
 		// create a new button element
 		const collapseButton = document.createElement("button");
-		collapseButton.innerText = "Collapse";
 		collapseButton.className = "collapse-button btn close";
+
+		// create a new icon element
+		const icon = document.createElement("i");
+		icon.className = "fa-solid fa-up-right-and-down-left-from-center";
+
+		// append the icon to the collapse button
+		collapseButton.appendChild(icon);
 
 		// add styles to the collapse button
 		Object.assign(collapseButton.style, collapseButtonStyles);
@@ -35,14 +40,11 @@ const setBtnCollapseTask = (): void => {
 			listGroup.style.display = listGroupStyle.display === "none" ? "block" : "none";
 		});
 
-		// get the panel-heading element for this task card
-		const panelHeading: HTMLElement = taskCard.querySelector(".panel-heading");
+		// get the label-info span element for this task card
+		const labelInfo: HTMLElement = taskCard.querySelector(".label-info");
 
-		// add styles to the parent of the collapse button
-		panelHeading.style.position = "relative";
-
-		// insert the collapse button as the second child of the panel-heading element
-		panelHeading.insertBefore(collapseButton, panelHeading.children[1]);
+		// insert the collapse button as the next sibling of the label-info span element
+		labelInfo.parentNode.insertBefore(collapseButton, labelInfo.previousSibling);
 	});
 };
 
