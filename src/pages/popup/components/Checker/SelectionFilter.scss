@@ -8,9 +8,11 @@
 		display: inline-block;
 		position: absolute;
 		top: -4px;
-		right: -18px;
+		right: -20px;
 		min-width: 10px;
 		padding: 3px 7px;
+		border-radius: 50%;
+
 		font-size: 13px;
 		font-weight: bold;
 		line-height: 1;
@@ -18,7 +20,9 @@
 		text-align: center;
 		white-space: nowrap;
 		vertical-align: middle;
+		
 		background-color: #77777730;
-		border-radius: 50%;
+		backdrop-filter: blur(1px);
+		-webkit-backdrop-filter: blur(5px);
 	}
 }
