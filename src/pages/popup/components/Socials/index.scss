@@ -1,0 +1,19 @@
+.socials {
+	position: absolute;
+	top: 5px;
+	right: 2px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.icon {
+		color: #777;
+		font-size: 20px;
+		margin: 0 5px;
+		transition: transform 0.2s ease-in-out;
+
+		&:hover {
+			transform: scale(1.2);
+		}
+	}
+}

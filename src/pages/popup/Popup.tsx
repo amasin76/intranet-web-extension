@@ -4,8 +4,8 @@ import { GetFiles } from "./components/getFiles";
 import { Checker } from "./components/Checker";
 import { DataProvider } from "./context/DataContext";
 import { Collapse } from "./components/Collapse";
+import Socials from "./components/Socials";
 import "@pages/popup/Popup.css";
-import { sendMessageToContent } from "@root/src/shared/utils/messages";
 
 export const Popup: React.FC = () => {
 	const [isWindowLoaded, setIsWindowLoaded] = useState(false);
@@ -24,6 +24,7 @@ export const Popup: React.FC = () => {
 
 	return (
 		<>
+			<Socials />
 			<GetFiles />
 			<DataProvider>
 				<Checker />
