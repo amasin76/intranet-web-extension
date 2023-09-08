@@ -1,40 +1,54 @@
-// TODO: split code to other file
+import findElementByText from "./utils/findElementByText";
+
 function scrapeFileNames(html: string): { dirName: string | undefined; fileNames: string[] } {
-	let parser = new DOMParser();
-	let doc = parser.parseFromString(html, "text/html");
-	let dirElement = Array.from(doc.querySelectorAll("li")).find((li) =>
-		li.textContent?.includes("Directory:")
-	);
-	let dirName = dirElement?.querySelector("code")?.textContent;
-	let fileNames: string[] = [];
-	let taskCards = doc.querySelectorAll(".task-card");
-	taskCards.forEach((taskCard) => {
-		let fileElements = taskCard.querySelectorAll("li");
-		fileElements.forEach((fileElement) => {
-			if (fileElement.textContent?.includes("File:")) {
-				let fileText = fileElement.textContent.replace("File:", "").trim();
-				let files = fileText.split(", ");
-				files.forEach((file) => {
-					fileNames.push(file.trim());
-				});
-			}
-		});
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(html, "text/html");
+	const fileNames: string[] = [];
+	const taskCards = doc.querySelectorAll(".task-card");
+	let dirName: string | undefined;
+
+	taskCards.forEach((taskCard, idx) => {
+		const fileElement = findElementByText(taskCard, "li", "File:");
+
+		if (idx === 0) {
+			const dirElement = findElementByText(taskCard, "li", "Directory:");
+			dirName = dirElement?.querySelector("code")?.textContent;
+		}
+		if (fileElement) {
+			const codeElements = fileElement.querySelectorAll("code");
+
+			codeElements.forEach((codeElement) => {
+				fileNames.push(codeElement.textContent.trim());
+			});
+		}
 	});
 	return { dirName, fileNames };
 }
 
 function generateCommandLine(dirName: string | undefined, fileNames: string[]): string {
-	let commandLine = `mkdir "${dirName}" && cd "${dirName}" && touch README.md `;
+	let commandLine = "";
 	let hasPyFiles = false,
 		hasJsFiles = false,
 		hasExecutableFiles = false;
-	let subDirs = new Set<string>();
+	const subDirs = new Set<string>();
+
+	if (dirName) {
+		commandLine = `mkdir "${dirName}" && cd "${dirName}" && touch README.md `;
+	} else {
+		commandLine =
+			"# The current project doesn’t provide a strict file structure (e.g printf, simple shell..). \
+This means that you have the freedom to create your own file structure for this project. \
+Feel free to organize your files in a way that makes sense to you and helps you \
+complete the project successfully🚀.\n\n # If this project is intended to have its own file \
+structure, please report this as a bug on the GitHub issue with project name to fix it";
+		return commandLine;
+	}
 
 	fileNames.forEach((fileName) => {
-		let parts = fileName.split("/");
+		const parts = fileName.split("/");
 		if (parts.length > 1) {
 			parts.pop();
-			let subDir = parts.join("/");
+			const subDir = parts.join("/");
 			subDirs.add(subDir);
 		}
 		fileName.endsWith(".py") && (hasPyFiles = true);
@@ -63,19 +77,20 @@ function generateCommandLine(dirName: string | undefined, fileNames: string[]): 
 }
 
 const copyCmdFiles = (sendResponse) => {
-	let html = document.documentElement.outerHTML;
-	let { dirName, fileNames } = scrapeFileNames(html);
-	let commandLine = generateCommandLine(dirName, fileNames);
+	const html = document.documentElement.outerHTML;
+	const { dirName, fileNames } = scrapeFileNames(html);
+	const commandLine = generateCommandLine(dirName, fileNames);
 
-	let textarea = document.createElement("textarea");
+	const textarea = document.createElement("textarea");
 	textarea.textContent = commandLine;
 	document.body.appendChild(textarea);
 
 	textarea.select();
 
 	try {
-		let successful = document.execCommand("copy");
-		let msg = successful ? "Command line copied to clipboard!" : "Could not copy command line to clipboard";
+		const successful = document.execCommand("copy");
+		const msg = successful ? "Command line copied to clipboard!" : "Could not copy command line to clipboard";
+		console.log(msg);
 		sendResponse({ success: true });
 	} catch (err) {
 		sendResponse({ success: false });
