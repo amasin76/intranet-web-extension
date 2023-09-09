@@ -1,38 +1,67 @@
 import findElementByText from "./utils/findElementByText";
 
-function scrapeFileNames(html: string): { dirName: string | undefined; fileNames: string[] } {
+function scrapeFileNames(html: string): {
+	dirName: string | undefined;
+	fileNames: string[];
+	isBigProject: boolean;
+} {
+	// Parse the HTML string into a DOM tree
 	const parser = new DOMParser();
 	const doc = parser.parseFromString(html, "text/html");
+
+	// Initialize the variables to store the results
 	const fileNames: string[] = [];
 	const taskCards = doc.querySelectorAll(".task-card");
 	let dirName: string | undefined;
+	let isBigProject = false;
 
-	taskCards.forEach((taskCard, idx) => {
+	// Loop through each task card
+	for (let idx = 0; idx < taskCards.length; idx++) {
+		const taskCard = taskCards[idx];
 		const fileElement = findElementByText(taskCard, "li", "File:");
 
+		// If first task card and there is no file name, set isBigProject to true
 		if (idx === 0) {
-			const dirElement = findElementByText(taskCard, "li", "Directory:");
-			dirName = dirElement?.querySelector("code")?.textContent;
+			if (!fileElement) {
+				isBigProject = true;
+				break;
+			} else {
+				// Otherwise get dirName
+				const dirElement = findElementByText(taskCard, "li", "Directory:");
+				dirName = dirElement?.querySelector("code")?.textContent;
+			}
 		}
+
+		// If there is no dirElement, set dirName to the repository name
+		if (!dirName) {
+			const repoElement = findElementByText(taskCard, "li", "GitHub repository:");
+			dirName = repoElement?.querySelector("code")?.textContent;
+		}
+
+		// Add available files names to the result array
 		if (fileElement) {
 			const codeElements = fileElement.querySelectorAll("code");
-
 			codeElements.forEach((codeElement) => {
 				fileNames.push(codeElement.textContent.trim());
 			});
 		}
-	});
-	return { dirName, fileNames };
+	}
+
+	return { dirName, fileNames, isBigProject };
 }
 
-function generateCommandLine(dirName: string | undefined, fileNames: string[]): string {
+function generateCommandLine(
+	dirName: string | undefined,
+	fileNames: string[],
+	isBigProject: boolean
+): string {
 	let commandLine = "";
 	let hasPyFiles = false,
 		hasJsFiles = false,
 		hasExecutableFiles = false;
 	const subDirs = new Set<string>();
 
-	if (dirName) {
+	if (!isBigProject) {
 		commandLine = `mkdir "${dirName}" && cd "${dirName}" && touch README.md `;
 	} else {
 		commandLine =
@@ -78,8 +107,8 @@ structure, please report this as a bug on the GitHub issue with project name to 
 
 const copyCmdFiles = (sendResponse) => {
 	const html = document.documentElement.outerHTML;
-	const { dirName, fileNames } = scrapeFileNames(html);
-	const commandLine = generateCommandLine(dirName, fileNames);
+	const { dirName, fileNames, isBigProject } = scrapeFileNames(html);
+	const commandLine = generateCommandLine(dirName, fileNames, isBigProject);
 
 	const textarea = document.createElement("textarea");
 	textarea.textContent = commandLine;
