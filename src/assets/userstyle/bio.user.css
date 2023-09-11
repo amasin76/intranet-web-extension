@@ -1,0 +1,26 @@
+/* user.css */
+:root {
+	--ext-blur: blur(400px);
+	--ext-overlay: rgba(0, 0, 0, 0.5);
+}
+
+body {
+	/* Add a background image */
+	background-image: url("https://source.unsplash.com/random/1920x1080/?nature");
+	background-repeat: no-repeat;
+	background-size: cover;
+	backdrop-filter: blur(5px);
+}
+
+.sidebar,
+.sidebar .logo-container,
+.sidebar > ul > li:last-child {
+	background: none;
+	backdrop-filter: var(--ext-blur);
+}
+
+.sidebar::before,
+.sidebar .logo-container::before,
+.sidebar > ul > li:last-child::before {
+	background-color: var(--ext-overlay);
+}

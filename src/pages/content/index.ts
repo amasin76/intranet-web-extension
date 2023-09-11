@@ -27,10 +27,31 @@ interface CollapseState {
 		const collapseState = await localStorage.load<CollapseState>("collapse-storage-key");
 		const { collapseSuccess, collapseFail } = collapseState;
 		toggleCollapseTasks(collapseSuccess, collapseFail);
+		// eslint-disable-next-line no-empty
 	} catch (err) {}
 })();
 
-let observers = {};
+// set userstyle (custom css) if available
+const customCssStorage = new LocalStorage();
+
+(async () => {
+	try {
+		const data: { customCss: string } = await customCssStorage.load("custom-css-key");
+		const customCss = data.customCss;
+		console.log(customCss);
+		if (customCss) {
+			const styleElement = document.createElement("style");
+			styleElement.textContent = customCss;
+			styleElement.id = "user-style";
+			document.head.append(styleElement);
+		}
+	} catch (err) {
+		customCssStorage.save("custom-css-key", "");
+		console.error(err);
+	}
+})();
+
+const observers = {};
 // TODO: add handler for messages to avoid if/else
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.message === "get-task-status") {
