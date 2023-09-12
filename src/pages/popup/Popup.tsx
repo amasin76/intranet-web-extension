@@ -5,10 +5,13 @@ import { Checker } from "./components/Checker";
 import { DataProvider } from "./context/DataContext";
 import { Collapse } from "./components/Collapse";
 import Socials from "./components/Socials";
+import { sendMessageToContent } from "@src/shared/utils/messages";
+import { TbRefresh } from "react-icons/tb";
 import "@pages/popup/Popup.css";
 
 export const Popup: React.FC = () => {
 	const [isWindowLoaded, setIsWindowLoaded] = useState(false);
+	const [advancedTasksLocked, setAdvancedTasksLocked] = useState(false);
 
 	useEffect(() => {
 		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -16,14 +19,30 @@ export const Popup: React.FC = () => {
 				setIsWindowLoaded(true);
 			}
 		});
+
+		sendMessageToContent({ message: "get-project-data" }, (response) => {
+			setAdvancedTasksLocked(response.advancedTasksLocked);
+		});
 	}, []);
 
 	if (!isWindowLoaded) {
 		// ADD: screen loader
 	}
 
+	const handleUnlockClick = () => {
+		sendMessageToContent({ message: "unlock-advanced-tasks" }, (response) => {
+			response.success && window.close(); // close the popup
+		});
+	};
+
 	return (
 		<>
+			{advancedTasksLocked && (
+				<a id="unlock-advanced-tasks" className="badge" href="#" onClick={handleUnlockClick}>
+					Unlock Advanced Tasks
+					<TbRefresh className="icon" />
+				</a>
+			)}
 			<Socials />
 			<GetFiles />
 			<DataProvider>

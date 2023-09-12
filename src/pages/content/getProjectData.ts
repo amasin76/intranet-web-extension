@@ -22,14 +22,26 @@ function isQuizAvailable(): boolean {
 	return false;
 }
 
+function isAdvancedTasksLocked(): boolean {
+	// Check if a form to unlock advanced tasks is present on the page
+	const unlockForm = document.querySelector("form.button_to[action$='/unlock_optionals']");
+
+	return !!unlockForm;
+}
+
 function getProjectData(
-	sendResponse: (data: { remainingTimeInMs: number; quizAvailable: boolean }) => void
+	sendResponse: (data: {
+		remainingTimeInMs: number;
+		quizAvailable: boolean;
+		advancedTasksLocked: boolean;
+	}) => void
 ): void {
 	if (document.querySelector("#project-metadata")) {
 		const remainingTimeInMs = getRemainingTime();
 		const quizAvailable = isQuizAvailable();
+		const advancedTasksLocked = isAdvancedTasksLocked();
 
-		sendResponse({ remainingTimeInMs, quizAvailable });
+		sendResponse({ remainingTimeInMs, quizAvailable, advancedTasksLocked });
 	}
 }
 

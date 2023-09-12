@@ -5,6 +5,7 @@ import runCheckedTasks from "./runCheckedTasks";
 import scrollToTask from "./scrollToTask";
 import copyCmdFiles from "./scrapeFilesNames";
 import checkerRunning from "./checkerRunning";
+import unlockAdvancedTasks from "./unlockAdvancedTasks";
 import { LocalStorage } from "@src/shared/storages/localStorage";
 import { setBtnCollapseTask, toggleCollapseTasks } from "./collapseTasks";
 
@@ -38,6 +39,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		getProjectData(sendResponse);
 	} else if (request.message === "get-task-status") {
 		getTaskData(sendResponse);
+	} else if (request.message === "unlock-advanced-tasks") {
+		unlockAdvancedTasks(sendResponse);
 	} else if (request.message === "run-checker") {
 		runCheckedTasks(request, sendResponse);
 	} else if (request.message === "scrape-file-names") {

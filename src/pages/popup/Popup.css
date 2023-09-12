@@ -44,13 +44,17 @@ button:focus:enabled {
 	box-shadow: rgba(94, 218, 11, 0.7) 0 80px 0px 2px inset;
 }
 
-.github {
-	text-align: center;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
+#unlock-advanced-tasks {
+	text-decoration: none;
+	color: #ccc;
+	font-size: 0.9rem;
+	color: #ffffffac;
+	background-color: #77777730;
+	padding-inline: 0.25rem;
+	border-radius: 5px;
 }
-
-.github a {
-	color: white;
+#unlock-advanced-tasks .icon {
+	font-size: 1.1rem;
+	vertical-align: bottom;
+	margin-left: 0.125rem;
 }
