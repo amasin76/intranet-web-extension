@@ -27,6 +27,34 @@
 		}
 	}
 
+	.checker-release {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		padding: 20px;
+		border-radius: 10px;
+		background-color: #181818;
+		color: #ddd;
+		font-size: 1rem;
+		text-align: center;
+
+		span {
+			color: var(--clr-green-light);
+			animation: slideIn 0.5s ease-out;
+		}
+
+		@keyframes slideIn {
+			0% {
+				transform: scaleX(0.9);
+			}
+			100% {
+				transform: scaleX(1);
+			}
+		}
+	}
+
 	.task-status {
 		display: inline-block;
 		margin: 5px;

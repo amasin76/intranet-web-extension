@@ -1,3 +1,4 @@
+import getProjectData from "./getProjectData";
 import getTaskData from "./getTaskData";
 import easyQuiz from "./easyQuiz";
 import runCheckedTasks from "./runCheckedTasks";
@@ -30,10 +31,12 @@ interface CollapseState {
 	} catch (err) {}
 })();
 
-let observers = {};
+const observers = {};
 // TODO: add handler for messages to avoid if/else
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	if (request.message === "get-task-status") {
+	if (request.message === "get-project-data") {
+		getProjectData(sendResponse);
+	} else if (request.message === "get-task-status") {
 		getTaskData(sendResponse);
 	} else if (request.message === "run-checker") {
 		runCheckedTasks(request, sendResponse);
