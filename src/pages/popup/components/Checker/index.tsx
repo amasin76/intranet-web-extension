@@ -11,10 +11,12 @@ import "./index.scss";
 export const Checker: React.FC = () => {
 	const { setTasks, checkedTasks, handleCheck, runningTasks, setRunningTasks } = useData();
 	const [remainingTimeInMs, setRemainingTimeInMs] = useState<number | null>(null);
+	const [quizAvailable, setQuizAvailable] = useState<boolean>(false);
 
 	useEffect(() => {
 		sendMessageToContent({ message: "get-project-data" }, (response) => {
 			setRemainingTimeInMs(response.remainingTimeInMs);
+			setQuizAvailable(response.quizAvailable);
 		});
 
 		sendMessageToContent({ message: "get-task-status" }, (response) => {
@@ -26,14 +28,13 @@ export const Checker: React.FC = () => {
 			setTasks(tasks);
 		});
 	}, [setTasks]);
-	console.log(remainingTimeInMs);
+
 	const fullTimeString = leftMsToTime(remainingTimeInMs); // dd:hh:mm:ss
 	const remainingTimeString = fullTimeString.replace(/ \d+S$/, ""); // dd:hh:mm
 
 	const runChecker = () => {
 		const tasksToRun = checkedTasks.filter((task) => !runningTasks.includes(task));
 		setRunningTasks((prevRunningTasks) => [...prevRunningTasks, ...tasksToRun]);
-		console.log(tasksToRun);
 		sendMessageToContent({ message: "run-checker", tasksToRun });
 		sendMessageToContent({ message: "create-observers", tasksToRun });
 	};
@@ -47,7 +48,7 @@ export const Checker: React.FC = () => {
 						<InfoButton />
 					</Tooltip>
 				</div>
-				{!(remainingTimeInMs > 0) && (
+				{!(remainingTimeInMs > 0) && !quizAvailable && (
 					<button id="run-checker" className="slide" onClick={runChecker}>
 						Run
 					</button>
@@ -58,6 +59,8 @@ export const Checker: React.FC = () => {
 				<div className="checker-release">
 					Checker will be released after <span>{remainingTimeString}</span>
 				</div>
+			) : quizAvailable ? (
+				<div className="checker-release">You have to pass the quiz before running the checker</div>
 			) : (
 				<>
 					<SelectionFilter />
