@@ -40,9 +40,10 @@ function scrapeFileNames(html: string): {
 
 		// Add available files names to the result array
 		if (fileElement) {
-			const codeElements = fileElement.querySelectorAll("code");
-			codeElements.forEach((codeElement) => {
-				fileNames.push(codeElement.textContent.trim());
+			const fileText = fileElement.textContent.replace("File:", "").trim();
+			const files = fileText.split(", ");
+			files.forEach((file) => {
+				fileNames.push(file.trim());
 			});
 		}
 	}
