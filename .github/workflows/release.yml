@@ -1,0 +1,47 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          cache: "yarn"
+
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+
+      - run: yarn install
+
+      - run: yarn build
+
+      - name: Create Zip
+        run: |
+          zip -r ${{ github.event.repository.name }}-${{ github.ref_name }}.zip dist/*
+
+      - name: Generate SHA256
+        id: sha
+        run: |
+          echo "sha=$(sha256sum ${{ github.event.repository.name }}-${{ github.ref_name }}.zip | awk '{ print $1 }')" >> $GITHUB_ENV
+
+      - name: Create Release and Upload Asset
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: ./${{ github.event.repository.name }}-${{ github.ref_name }}.zip
+          body: "### Checksum (SHA256):\n```\n${{ env.sha }}\n```"
