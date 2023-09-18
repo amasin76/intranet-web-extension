@@ -30,7 +30,7 @@ function isCheckerBtnAvailable(): boolean {
 	// Check if a checker button is present on the page
 	const checkerBtn = document.querySelectorAll("button[id='task-num-0-check-code-btn']");
 
-	return !!checkerBtn;
+	return !!checkerBtn.length;
 }
 
 function getProjectData(
