@@ -8,6 +8,7 @@ import checkerRunning from "./checkerRunning";
 import unlockAdvancedTasks from "./unlockAdvancedTasks";
 import { LocalStorage } from "@src/shared/storages/localStorage";
 import { setBtnCollapseTask, toggleCollapseTasks } from "./collapseTasks";
+import refreshPage from "./refreshPage";
 
 // Quizz Button Floating
 easyQuiz();
@@ -35,7 +36,9 @@ interface CollapseState {
 const observers = {};
 // TODO: add handler for messages to avoid if/else
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	if (request.message === "get-project-data") {
+	if (request.message === "refresh-page") {
+		refreshPage(sendResponse);
+	} else if (request.message === "get-project-data") {
 		getProjectData(sendResponse);
 	} else if (request.message === "get-task-status") {
 		getTaskData(sendResponse);
