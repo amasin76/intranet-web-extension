@@ -31,7 +31,8 @@ jobs:
 
       - name: Create Zip
         run: |
-          zip -r ${{ github.event.repository.name }}-${{ github.ref_name }}.zip dist/*
+          cd dist
+          zip -r ../${{ github.event.repository.name }}-${{ github.ref_name }}.zip .
 
       - name: Generate SHA256
         id: sha
