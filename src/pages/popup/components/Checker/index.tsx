@@ -48,9 +48,6 @@ export const Checker: React.FC = () => {
 		});
 	};
 
-	console.log(remainingTimeInMs);
-	console.log(hasCheckerBtn);
-
 	return (
 		<div className="checker">
 			<div className="checker--title">

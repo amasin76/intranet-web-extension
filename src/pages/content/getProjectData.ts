@@ -4,7 +4,7 @@ function getRemainingTime(): number {
 	const now = new Date();
 	const projectMetadata = document.querySelector("#project-metadata");
 	const checkerElement = findElementByText(projectMetadata, "li", "Checker");
-	const timeString = (checkerElement.querySelector(".datetime") as HTMLElement).innerText;
+	const timeString = (checkerElement?.querySelector(".datetime") as HTMLElement)?.innerText;
 	const releaseTime = new Date(timeString);
 	const remainingTimeInMs = releaseTime.getTime() - now.getTime();
 
