@@ -14,12 +14,9 @@ function getRemainingTime(): number {
 function isQuizAvailable(): boolean {
 	// Check if a quiz is available on the page
 	const quizContainer = document.querySelector(".quiz_questions_show_container");
+	const quizButton = quizContainer?.querySelector(".quiz_questions_results button");
 
-	if (quizContainer) {
-		const quizButton = quizContainer.querySelector(".quiz_questions_results button");
-		return !!quizButton;
-	}
-	return false;
+	return !!quizButton;
 }
 
 function isAdvancedTasksLocked(): boolean {
@@ -29,19 +26,28 @@ function isAdvancedTasksLocked(): boolean {
 	return !!unlockForm;
 }
 
+function isCheckerBtnAvailable(): boolean {
+	// Check if a checker button is present on the page
+	const checkerBtn = document.querySelectorAll("button[id='task-num-0-check-code-btn']");
+
+	return !!checkerBtn;
+}
+
 function getProjectData(
 	sendResponse: (data: {
 		remainingTimeInMs: number;
 		quizAvailable: boolean;
 		advancedTasksLocked: boolean;
+		hasCheckerBtn: boolean;
 	}) => void
 ): void {
 	if (document.querySelector("#project-metadata")) {
 		const remainingTimeInMs = getRemainingTime();
 		const quizAvailable = isQuizAvailable();
 		const advancedTasksLocked = isAdvancedTasksLocked();
+		const hasCheckerBtn = isCheckerBtnAvailable();
 
-		sendResponse({ remainingTimeInMs, quizAvailable, advancedTasksLocked });
+		sendResponse({ remainingTimeInMs, quizAvailable, advancedTasksLocked, hasCheckerBtn });
 	}
 }
 

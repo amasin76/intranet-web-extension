@@ -43,6 +43,12 @@
 		span {
 			color: var(--clr-green-light);
 			animation: slideIn 0.5s ease-out;
+
+			a .icon {
+				font-size: 1.1rem;
+				vertical-align: bottom;
+				margin-left: 0.125rem;
+			}
 		}
 
 		@keyframes slideIn {

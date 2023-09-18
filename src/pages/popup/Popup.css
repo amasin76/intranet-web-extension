@@ -44,7 +44,7 @@ button:focus:enabled {
 	box-shadow: rgba(94, 218, 11, 0.7) 0 80px 0px 2px inset;
 }
 
-#unlock-advanced-tasks {
+.label {
 	text-decoration: none;
 	color: #ccc;
 	font-size: 0.9rem;

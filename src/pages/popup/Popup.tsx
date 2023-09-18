@@ -38,7 +38,7 @@ export const Popup: React.FC = () => {
 	return (
 		<>
 			{advancedTasksLocked && (
-				<a id="unlock-advanced-tasks" className="badge" href="#" onClick={handleUnlockClick}>
+				<a id="unlock-advanced-tasks" className="badge label" href="#" onClick={handleUnlockClick}>
 					Unlock Advanced Tasks
 					<TbRefresh className="icon" />
 				</a>
