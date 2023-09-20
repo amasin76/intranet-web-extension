@@ -8,26 +8,28 @@
 
 body {
 	display: block;
+	position: relative;
 	background-color: #222;
 	color: #eee;
 	width: 20rem;
-	height: 30rem;
+	min-height: 30rem;
 	margin: 0.5rem;
 	-webkit-font-smoothing: antialiased;
 }
 
 /* width */
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 8px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
 	background: #444;
-	border-radius: 10px;
+	border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	background: #555;
+	cursor: grab;
 }

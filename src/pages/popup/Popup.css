@@ -58,3 +58,12 @@ button:focus:enabled {
 	vertical-align: bottom;
 	margin-left: 0.125rem;
 }
+
+#version {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+
+	color: #777;
+	text-decoration: none;
+}
