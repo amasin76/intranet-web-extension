@@ -1,0 +1,40 @@
+.button {
+	display: inline-block;
+	font-size: 1.2em;
+	padding: 10px 20px;
+	color: #fff;
+	background-color: var(--clr-green-light);
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+
+	&:hover {
+		background-color: var(--clr-green-dark);
+	}
+}
+
+.link {
+	display: inline-flex;
+	align-items: center;
+	gap: 1px;
+
+	color: #1586ff;
+	font-size: 1rem;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+
+	&:hover {
+		color: #0056b3;
+	}
+
+	&:active {
+		color: #003580;
+	}
+
+	.icon {
+		font-size: 1.1rem;
+		vertical-align: bottom;
+		margin-left: 0.125rem;
+	}
+}
