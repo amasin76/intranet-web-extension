@@ -14,7 +14,7 @@ import "@pages/popup/Popup.css";
 export const Popup: React.FC = () => {
 	// const [isWindowLoaded, setIsWindowLoaded] = useState(false);
 	const [advancedTasksLocked, setAdvancedTasksLocked] = useState(false);
-	const [isUrlMatch, setIsUrlMatch] = useState(false);
+	const [isUrlMatch, setIsUrlMatch] = useState(null);
 
 	useEffect(() => {
 		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -22,9 +22,7 @@ export const Popup: React.FC = () => {
 			const url = tabs[0].url;
 			console.log(url, projectUrlPattern.test(url));
 
-			if (projectUrlPattern.test(url)) {
-				setIsUrlMatch(true);
-			}
+			projectUrlPattern.test(url) ? setIsUrlMatch(true) : setIsUrlMatch(false);
 		});
 	}, []);
 
@@ -48,7 +46,7 @@ export const Popup: React.FC = () => {
 	return (
 		<>
 			<Socials />
-			{isUrlMatch ? (
+			{isUrlMatch && (
 				<>
 					{advancedTasksLocked && (
 						<a id="unlock-advanced-tasks" className="badge label" href="#" onClick={handleUnlockClick}>
@@ -62,9 +60,8 @@ export const Popup: React.FC = () => {
 					</DataProvider>
 					<Collapse />
 				</>
-			) : (
-				<Redirect />
 			)}
+			{isUrlMatch === false && <Redirect />}
 			<a
 				id="version"
 				href="https://github.com/amasin76/intranet-chrome-extension/releases"
