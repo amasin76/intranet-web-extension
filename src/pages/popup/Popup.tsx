@@ -18,7 +18,7 @@ export const Popup: React.FC = () => {
 
 	useEffect(() => {
 		chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-			const projectUrlPattern = new RegExp("^https://intranet.alxswe.com/projects/\\d+$");
+			const projectUrlPattern = new RegExp("^https://intranet.alxswe.com/projects/\\d+");
 			const url = tabs[0].url;
 			console.log(url, projectUrlPattern.test(url));
 
