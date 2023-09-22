@@ -1,15 +1,16 @@
 .socials {
-	position: absolute;
-	top: 8px;
-	right: 2px;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
+	gap: 5px;
+
+	position: absolute;
+	top: 0px;
+	right: 0px;
 
 	.icon {
 		color: #777;
 		font-size: 20px;
-		margin: 0 5px;
 		transition: transform 0.2s ease-in-out;
 
 		&:hover {
