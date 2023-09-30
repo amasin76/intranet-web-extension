@@ -1,4 +1,5 @@
 import { AiFillGithub, AiFillBug, AiFillEdit, AiFillStar } from "react-icons/ai";
+import { IoSettingsSharp } from "react-icons/io5";
 import "./index.scss";
 
 export const Socials = () => {
@@ -27,6 +28,19 @@ export const Socials = () => {
 				rel="noopener noreferrer"
 			>
 				<AiFillGithub className="icon" />
+			</a>
+			<a
+				target="_blank"
+				rel="noopener noreferrer"
+				onClick={() => {
+					if (chrome && chrome.runtime && chrome.runtime.openOptionsPage) {
+						chrome.runtime.openOptionsPage();
+					} else {
+						window.open(chrome.runtime.getURL("options.html"));
+					}
+				}}
+			>
+				<IoSettingsSharp className="icon" />
 			</a>
 		</div>
 	);
