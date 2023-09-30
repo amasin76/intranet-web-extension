@@ -50,11 +50,13 @@ export default defineConfig({
 		reportCompressedSize: isProduction,
 		rollupOptions: {
 			input: {
+				// ADD: particles.js page to the content
 				content: resolve(pagesDir, "content", "index.ts"),
 				background: resolve(pagesDir, "background", "index.ts"),
 				contentStyle: resolve(pagesDir, "content", "style.scss"),
 				popup: resolve(pagesDir, "popup", "index.html"),
 				options: resolve(pagesDir, "options", "index.html"),
+				"content/particles": resolve(pagesDir, "content", "particles", "index.ts"),
 			},
 			output: {
 				entryFileNames: "src/pages/[name]/index.js",

@@ -9,6 +9,7 @@ import unlockAdvancedTasks from "./unlockAdvancedTasks";
 import { LocalStorage } from "@src/shared/storages/localStorage";
 import { setBtnCollapseTask, toggleCollapseTasks } from "./collapseTasks";
 import refreshPage from "./refreshPage";
+import userStyle from "./userStyle";
 
 // Quizz Button Floating
 easyQuiz();
@@ -16,8 +17,10 @@ easyQuiz();
 scrollToTask();
 // set collapse button for each task
 setBtnCollapseTask();
+// set userstyle
+userStyle();
 
-// Auto collapse tasks based user prefrenaces
+// Auto collapse tasks based on user prefrenaces
 const localStorage = new LocalStorage();
 
 interface CollapseState {
