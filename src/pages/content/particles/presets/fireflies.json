@@ -1,0 +1,65 @@
+{
+	"fpsLimit": 30,
+	"particles": {
+		"number": {
+			"value": 100
+		},
+		"color": {
+			"value": {
+				"rgb": {
+					"r": { "min": 200, "max": 255 },
+					"g": { "min": 222, "max": 204 },
+					"b": { "min": 13, "max": 0 }
+				}
+			}
+		},
+		"shape": {
+			"type": "image",
+			"image": {
+				"src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 100'%3E%3Cellipse cx='25' cy='50' rx='15' ry='50' style='fill:yellow;' /%3E%3C/svg%3E"
+			}
+		},
+		"opacity": {
+			"value": { "min": 0.1, "max": 1 }
+		},
+		"size": {
+			"value": { "min": 1, "max": 3 },
+			"random": true,
+			"anim": {
+				"enable": true,
+				"speed": 5,
+				"size_min": 2,
+				"sync": false
+			}
+		},
+		"move": {
+			"enable": true,
+			"speed": { "min": 0.4, "max": 1.2 },
+			"direction": "none",
+			"random": true,
+			"straight": false,
+			"out_mode": "out",
+			"bounce": false,
+			"attract": {
+				"enable": false,
+				"rotateX": 600,
+				"rotateY": 1200
+			}
+		}
+	},
+	"interactivity": {
+		"events": {
+			"onHover": {
+				"enable": true,
+				"mode": "bounce"
+			},
+			"resize": true
+		},
+		"modes": {
+			"repulse": {
+				"distance": 10,
+				"duration": 1
+			}
+		}
+	}
+}

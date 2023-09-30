@@ -1,0 +1,16 @@
+/* 
+Caution: the style applied after the page got painted
+so for first ms will not effect your content
+*/
+
+/* blur */
+li,
+code,
+.panel-body {
+	filter: blur(4px);
+}
+
+/* hide alerts */
+#layout-bars {
+	display: none;
+}

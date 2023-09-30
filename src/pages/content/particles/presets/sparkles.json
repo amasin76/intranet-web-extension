@@ -1,0 +1,66 @@
+{
+	"fpsLimit": 30,
+  "particles": {
+    "number": {
+      "value": 50,
+      "density": {
+        "enable": false,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#CDE8F4"
+    },
+    "shape": {
+      "type": "polygon",
+      "polygon": {
+        "nb_sides": 6
+      }
+    },
+    "opacity": {
+      "value": 0.3,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": {"min": 15, "max": 20},
+      "random": false
+    },
+    "line_linked": {
+      "enable": false
+    },
+    "move": {
+      "enable": true,
+      "speed": 0.5,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out"
+    }
+  },
+  "interactivity": {
+    "detect_on": "window",
+    "events": {
+      "onhover": {
+        "enable": true,
+        "mode": "bubble"
+      },
+      "resize": true
+    },
+    "modes": {
+      "bubble": {
+        "distance": 100,
+        "size": 25,
+        "duration": 2,
+        "opacity": 1,
+        "speed": 3
+      }
+    }
+  },
+  "retina_detect": false
+}
