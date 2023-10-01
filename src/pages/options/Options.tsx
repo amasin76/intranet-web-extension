@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import themeStorage from "@src/shared/storages/themeStorage";
 import UserStyle from "./components/userStyle/";
 import "@assets/style/theme.scss";
+import "./Options.css";
 
 const Options: React.FC = () => {
 	const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -14,7 +15,7 @@ const Options: React.FC = () => {
 	}, []);
 
 	return (
-		<div className="container h-screen mx-auto px-4 sm:px-6 lg:px-60 py-5 bg-gray-900 text-white">
+		<div className="min-h-screen lg:px-60 md:px-10 sm:px-2 py-5 bg-gray-900 text-white">
 			<UserStyle />
 		</div>
 	);

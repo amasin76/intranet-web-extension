@@ -48,7 +48,7 @@ const Custom: React.FC = () => {
 				<Switch checked={customEnabled} onChange={handleCustom()} />
 			</div>
 			{customEnabled && (
-				<div className="inline-flex mx-4 gap-8 text-gray-300">
+				<div className="inline-flex flex-wrap mx-4 gap-8 text-gray-300">
 					<div className="flex flex-1 items-center gap-4">
 						<h4 className="text-xl">CSS</h4>
 						<input

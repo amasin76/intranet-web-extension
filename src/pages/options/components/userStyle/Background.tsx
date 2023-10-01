@@ -57,7 +57,7 @@ const Background: React.FC = () => {
 				<Switch checked={bgEnabled} onChange={handleBackground()} />
 			</div>
 			{bgEnabled && (
-				<div className="grid grid-cols-3 justify-between gap-y-4 ml-4">
+				<div className="flex flex-wrap gap-2 ml-4">
 					{images.map((src, index) => (
 						<ImagePreview
 							key={index}
