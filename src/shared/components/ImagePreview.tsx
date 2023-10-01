@@ -14,7 +14,12 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ src, isSelected, onNewImage
 
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files ? e.target.files[0] : null;
-		if (file) {
+		const fileSize = file?.size / 1024 / 1024;
+		const SIZE_LIMIT = 3;
+
+		if (file && fileSize > SIZE_LIMIT) {
+			alert(`Maximum size is ${SIZE_LIMIT}MB`);
+		} else if (file) {
 			const reader = new FileReader();
 			reader.onload = (e) => {
 				const contents = e.target.result as string;
@@ -44,7 +49,13 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ src, isSelected, onNewImage
 						<BsPlusCircleFill />
 						New Image
 					</label>
-					<input type="file" id="upload-img" onChange={handleFileChange} className="hidden" />
+					<input
+						type="file"
+						accept="image/png, image/jpeg, image/jpg, image/gif, image/avif, image/webp"
+						id="upload-img"
+						onChange={handleFileChange}
+						className="hidden"
+					/>
 				</>
 			)}
 			{src && isHovered && (
