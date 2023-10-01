@@ -56,7 +56,6 @@ export default defineConfig({
 				contentStyle: resolve(pagesDir, "content", "style.scss"),
 				popup: resolve(pagesDir, "popup", "index.html"),
 				options: resolve(pagesDir, "options", "index.html"),
-				"content/particles": resolve(pagesDir, "content", "particles", "index.ts"),
 			},
 			output: {
 				entryFileNames: "src/pages/[name]/index.js",

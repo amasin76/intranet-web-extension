@@ -17,8 +17,6 @@ easyQuiz();
 scrollToTask();
 // set collapse button for each task
 setBtnCollapseTask();
-// set userstyle
-userStyle();
 
 // Auto collapse tasks based on user prefrenaces
 const localStorage = new LocalStorage();
@@ -59,3 +57,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		sendResponse({ success: true });
 	}
 });
+
+// TODO: move userstyle to new content-script context
+userStyle();

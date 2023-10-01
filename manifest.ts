@@ -22,7 +22,7 @@ const manifest: chrome.runtime.ManifestV3 = {
 	content_scripts: [
 		{
 			matches: ["https://intranet.alxswe.com/*"],
-			js: ["src/pages/content/index.js", "src/pages/content/particles/index.js"],
+			js: ["src/pages/content/index.js"],
 			run_at: "document_end",
 			// KEY for cache invalidation
 			css: ["assets/css/contentStyle<KEY>.chunk.css"],
