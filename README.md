@@ -13,19 +13,21 @@ Provides you with a command that includes all the files and directories trees of
 Simply copy and paste the command into your terminal
 
 **Task Navigation:**  
-Scroll to your desired task with ease using the keyboard,
-which maps task numbers to the number keys on your keyboard.
+Scroll to your desired task with ease using the keyboard shortcut.
 
 **Checker Control:**  
 Select checks you want to run. Also Get feedback on which tasks have failed or succeeded.  
 ( Please try keep servers healthy 💚 by only running the checks you need )
 
 **Easy Quiz:**  
-You dont have any more keep scroll down and up to correct you ansewrs,
+You dont have any more keep scroll down and up to correct you ansewrs,  
 allows you to easily review and change your responses
 
 **Collapse Tasks:**  
 Allows to collapse individual tasks or all successful/failed tasks at once
+
+**User Style:**  
+fully customize the styling of your intranet page
 
 ## 🧩 Installation
 
@@ -50,6 +52,8 @@ There are several ways to install the extension:
   For example, to navigate to task number 12, hold down the Shift key and press the 1 key followed by the 2 key.
 - **Checker Control**, **Easy Quiz**, **Collapse Tasks:**  
   The user interface is simple and self-explanatory
+- **User Style:**  
+  Go to extension settings ( click the top-right icon in popup )
 
 ## 🛡️ Privacy and Policies
 
