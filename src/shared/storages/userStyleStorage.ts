@@ -8,18 +8,20 @@ type UserStyleState = {
 	presetsParticles: string[];
 	selectedBgImage: string;
 	selectedPresetParticles: string;
-	customCss: string;
+	particlesSettings: { fpsLimit: number };
 	customParticles: string;
+	customCss: string;
 };
 
 const initialState: UserStyleState = {
-	bgEnabled: true,
-	particlesEnabled: true,
-	customEnabled: true,
+	bgEnabled: false,
+	particlesEnabled: false,
+	customEnabled: false,
 	bgImages: ["https://i.imgur.com/BUqxLcd.jpg"],
 	presetsParticles: ["fireflies", "sparkles"],
 	selectedBgImage: "https://i.imgur.com/BUqxLcd.jpg",
-	selectedPresetParticles: "fireflies",
+	selectedPresetParticles: "sparkles",
+	particlesSettings: { fpsLimit: 30 },
 	customParticles: "",
 	customCss: "",
 };

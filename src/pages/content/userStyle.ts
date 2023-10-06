@@ -28,7 +28,7 @@ const setUserStyle = () => {
 		chrome.storage.local.get(["user-style-key"], (result) => {
 			const data = result["user-style-key"];
 			if (!data) return;
-			const { customCss, selectedBgImage } = data;
+			const { customCss, bgEnabled, selectedBgImage } = data;
 
 			if (customCss) {
 				const styleElement = document.createElement("style");
@@ -36,7 +36,7 @@ const setUserStyle = () => {
 				styleElement.id = "user-style";
 				document.head.append(styleElement);
 			}
-			if (selectedBgImage) {
+			if (bgEnabled && selectedBgImage) {
 				document.body.style.backgroundImage = `url("${selectedBgImage}")`;
 				document.body.style.backgroundSize = "cover";
 			}
@@ -50,25 +50,30 @@ const userStyle = () => {
 	createCanvas();
 
 	(async () => {
-		// TODO: use localstorage wrapper
 		const data = await chrome.storage.local.get("user-style-key");
 		if (Object.keys(data).length === 0) return;
 
-		const { particlesEnabled, selectedPresetParticles } = data["user-style-key"];
+		const { particlesEnabled, selectedPresetParticles, particlesSettings } = data["user-style-key"];
 		if (!particlesEnabled) return;
 
 		await loadFull(tsParticles);
-		// TODO: use dynamic import
+
+		const presets = {
+			fireflies: fireflies as ISourceOptions,
+			sparkles: sparkles as ISourceOptions,
+		};
+
+		let options: ISourceOptions;
 		if (data["user-style-key"]?.customParticles) {
-			await tsParticles.load(
-				"tsparticles",
-				JSON.parse(data["user-style-key"].customParticles) as ISourceOptions
-			);
-		} else if (selectedPresetParticles === "fireflies") {
-			await tsParticles.load("tsparticles", fireflies as ISourceOptions);
-		} else if (selectedPresetParticles === "sparkles") {
-			await tsParticles.load("tsparticles", sparkles as ISourceOptions);
+			options = JSON.parse(data["user-style-key"].customParticles) as ISourceOptions;
+		} else {
+			options = presets[selectedPresetParticles];
 		}
+
+		// Set the fps limit
+		options.fpsLimit = particlesSettings.fpsLimit;
+
+		await tsParticles.load("tsparticles", options);
 	})();
 
 	setUserStyle();
