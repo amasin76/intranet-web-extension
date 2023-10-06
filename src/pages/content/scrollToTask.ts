@@ -1,7 +1,8 @@
+import findElementByText from "./utils/findElementByText";
 import scrollToElement from "./utils/scrollToElement";
 
 function scrollToTask(): void {
-	let taskNum: string = "";
+	let taskNum = "";
 
 	// Listens for keydown events to capture task number input
 	document.addEventListener("keydown", (event: KeyboardEvent): void => {
@@ -15,6 +16,20 @@ function scrollToTask(): void {
 				taskNum = String.fromCharCode(event.keyCode);
 				scrollToElement("#task-num-" + taskNum);
 			}
+		}
+		// Hotkey for resourcess section
+		if (event.key === "r") {
+			const projectDescription = document.querySelector("#project-description");
+
+			if (projectDescription) {
+				const resourcesElement = findElementByText(projectDescription, "h2", "Requirements");
+				resourcesElement && resourcesElement.scrollIntoView();
+			}
+		}
+		if (event.ctrlKey && event.key === "k") {
+			const searchButton: HTMLElement = document.querySelector("#search-button");
+			event.preventDefault();
+			searchButton && searchButton.click();
 		}
 	});
 
