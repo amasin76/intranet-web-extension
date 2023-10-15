@@ -28,9 +28,11 @@ function isAdvancedTasksLocked(): boolean {
 
 function isCheckerBtnAvailable(): boolean {
 	// Check if a checker button is present on the page
-	const checkerBtn = document.querySelectorAll("button[id='task-num-0-check-code-btn']");
+	const checkerBtn =
+		document.querySelectorAll("button[id='task-num-0-check-code-btn']").length ||
+		document.querySelectorAll("button[id='task-num-1-check-code-btn']").length;
 
-	return !!checkerBtn.length;
+	return !!checkerBtn;
 }
 
 function getProjectData(
