@@ -18,7 +18,11 @@ const createCanvas = () => {
 		body {
 			position: relative;
 			z-index: 0;
-		}`;
+		}
+		
+		body.dark main {
+    background-color: transparent !important;
+}`;
 	style.id = "particles";
 	document.head.appendChild(style);
 };
