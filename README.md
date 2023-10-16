@@ -3,8 +3,8 @@
 <p>
 <div align="center"> <img src="https://i.imgur.com/8hmgGKr.png" alt="Preview" height="400" width="250"> </div>
 <p align="center"><sub>(Screenshot from v0.2.2)</sub></p> <br />
-Tutorial Video (arabic / darija): https://youtu.be/WxMfN6YxmDs 
-</p>
+<img height="32" width="32" src="https://cdn.simpleicons.org/youtube"/>
+<a rel="noreferrer noopener" target="_blank" href="https://youtu.be/6FhrEXUd1m4"> Tutorial Video</a> By <a rel="noreferrer noopener" target="_blank" href="https://github.co/nuuxcode">Mounssif</a> ❤️
 
 ## 🎛️ Features
 
