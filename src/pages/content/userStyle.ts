@@ -75,7 +75,7 @@ const userStyle = () => {
 		}
 
 		// Set the fps limit
-		options.fpsLimit = particlesSettings.fpsLimit;
+		options.fpsLimit = particlesSettings?.fpsLimit || 30;
 
 		await tsParticles.load("tsparticles", options);
 	})();

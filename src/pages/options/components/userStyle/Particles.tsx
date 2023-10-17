@@ -9,7 +9,7 @@ const Particles: React.FC = () => {
 	const { particlesEnabled, presetsParticles, selectedPresetParticles, particlesSettings } =
 		useStorage(userStyleStorage);
 	const [selectedPreset, setSelectedPreset] = useState<string | null>(selectedPresetParticles);
-	const [fpsLimit, setFpsLimit] = useState<number>(particlesSettings.fpsLimit);
+	const [fpsLimit, setFpsLimit] = useState<number>(particlesSettings?.fpsLimit || 30);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const isEnabled = e.target.checked;
