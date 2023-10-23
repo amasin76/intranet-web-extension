@@ -9,6 +9,7 @@ import Redirect from "./components/Redirect";
 import { sendMessageToContent } from "@src/shared/utils/messages";
 import { version } from "@root/package.json";
 import { TbRefresh } from "react-icons/tb";
+import ExternalLink from "@src/shared/components/ExternalLink";
 import "@pages/popup/Popup.css";
 
 export const Popup: React.FC = () => {
@@ -62,6 +63,14 @@ export const Popup: React.FC = () => {
 				</>
 			)}
 			{isUrlMatch === false && <Redirect />}
+			<div className="emoji-block">
+				<span className="emoji">🇵🇸</span>
+				<ExternalLink
+					href="https://twitter.com/i/status/1715405849785667825"
+					className="link text"
+					text="Stop Genocide in Palestine"
+				/>
+			</div>
 			<a
 				id="version"
 				href="https://github.com/amasin76/intranet-chrome-extension/releases"

@@ -67,3 +67,36 @@ button:focus:enabled {
 	color: #777;
 	text-decoration: none;
 }
+
+.emoji-block {
+	position: absolute;
+	padding: 0;
+	right: 0;
+	top: 28px;
+
+	font-size: 1.3rem;
+	white-space: nowrap;
+	overflow: hidden;
+
+	background-color: #222;
+}
+
+.emoji-block .emoji,
+.emoji-block .text {
+	display: inline-block;
+}
+
+.emoji-block .emoji {
+	margin-right: 5px;
+}
+
+.emoji-block .text {
+	max-width: 0;
+	vertical-align: baseline;
+	overflow: hidden;
+	transition: max-width 0.5s ease-in-out;
+}
+
+.emoji-block:hover .text {
+	max-width: 250px;
+}
