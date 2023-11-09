@@ -15,11 +15,7 @@ const Redirect: React.FC = () => {
 			</div>
 			<p>Need Help!</p>
 			<div className="btn-grp">
-				<ExternalLink
-					href="https://github.com/amasin76/intranet-chrome-extension#readme"
-					className="link"
-					text="Readme"
-				/>
+				<ExternalLink href="https://youtu.be/6FhrEXUd1m4" className="link" text="Tutorial" />
 				<ExternalLink href="https://www.twitter.com/amasin76" className="link" text="Contact Developer" />
 			</div>
 		</div>
