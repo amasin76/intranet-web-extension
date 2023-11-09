@@ -39,39 +39,41 @@ export const TaskList: React.FC<TaskListProps> = ({ onCheck }) => {
 
 	return (
 		<div id="task-list">
-			{tasks.map((task, index) => {
-				const isChecked = checkedTasks.includes(task.taskId);
-				const isTaskRunning = runningTasks.includes(task.taskId);
-				const taskStatus = task.status === "yes" ? "green" : task.status === "no" ? "red" : "";
+			{tasks
+				.filter((task) => task.hasChecker)
+				.map((task, index) => {
+					const isChecked = checkedTasks.includes(task.taskId);
+					const isTaskRunning = runningTasks.includes(task.taskId);
+					const taskStatus = task.status === "yes" ? "green" : task.status === "no" ? "red" : "";
 
-				return (
-					<label
-						key={task.taskId}
-						className={`task-status ${taskStatus} ${isChecked ? "checked" : ""} ${
-							isTaskRunning ? "running" : ""
-						}`}
-						data-task-id={task.taskId}
-					>
-						<input
-							type="checkbox"
-							onChange={() => onCheck(task.taskId)}
-							checked={isChecked}
-							disabled={isTaskRunning}
-						/>
-						<span className="task-index">{finishedTasks.includes(task.taskId) || index}</span>
-						<span
-							className={`spinner ${taskStatus}`}
-							style={{ display: isTaskRunning ? "inline-block" : "none" }}
-						></span>
-						{finishedTasks.includes(task.taskId) && task.status === "yes" && (
-							<span className="feedback">OK</span>
-						)}
-						{finishedTasks.includes(task.taskId) && task.status === "no" && (
-							<span className="feedback">X</span>
-						)}
-					</label>
-				);
-			})}
+					return (
+						<label
+							key={task.taskId}
+							className={`task-status ${taskStatus} ${isChecked ? "checked" : ""} ${
+								isTaskRunning ? "running" : ""
+							}`}
+							data-task-id={task.taskId}
+						>
+							<input
+								type="checkbox"
+								onChange={() => onCheck(task.taskId)}
+								checked={isChecked}
+								disabled={isTaskRunning}
+							/>
+							<span className="task-index">{finishedTasks.includes(task.taskId) || index}</span>
+							<span
+								className={`spinner ${taskStatus}`}
+								style={{ display: isTaskRunning ? "inline-block" : "none" }}
+							></span>
+							{finishedTasks.includes(task.taskId) && task.status === "yes" && (
+								<span className="feedback">OK</span>
+							)}
+							{finishedTasks.includes(task.taskId) && task.status === "no" && (
+								<span className="feedback">X</span>
+							)}
+						</label>
+					);
+				})}
 		</div>
 	);
 };

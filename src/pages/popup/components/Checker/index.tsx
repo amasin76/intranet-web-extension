@@ -26,10 +26,11 @@ export const Checker: React.FC = () => {
 
 	useEffect(() => {
 		sendMessageToContent({ message: "get-task-status" }, (response) => {
-			const { taskStatus, taskIds } = response;
+			const { taskStatus, taskIds, hasChecker } = response;
 			const tasks = taskIds.map((taskId: string, idx: number) => ({
 				taskId,
 				status: taskStatus[idx],
+				hasChecker: hasChecker[idx],
 			}));
 			setTasks(tasks);
 		});

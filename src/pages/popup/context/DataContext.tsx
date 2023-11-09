@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 interface Task {
 	taskId: string;
 	status: string;
+	hasChecker: boolean;
 }
 
 interface DataContextValue {
