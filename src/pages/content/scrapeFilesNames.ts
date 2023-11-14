@@ -15,6 +15,8 @@ function scrapeFileNames(html: string): {
 	for (let idx = 0; idx < taskCards.length; idx++) {
 		const taskCard = taskCards[idx];
 		const fileElement = findElementByText(taskCard, "li", "File:");
+		const dirElement = findElementByText(taskCard, "li", "Directory:");
+		dirName = dirElement?.querySelector("code")?.textContent;
 
 		// If there is no dirElement, set dirName to the repository name
 		if (!dirName) {
