@@ -20,7 +20,7 @@ Select checks you want to run. Also Get feedback on which tasks have failed or s
 ( Please try keep servers healthy 💚 by only running the checks you need )
 
 **Easy Quiz:**  
-You don't have to scroll down and up to check or update your answers,  
+You don't have to scroll down and up to check or update your answers any more,  
 allows you to easily review and change your responses
 
 **Collapse Tasks:**  
