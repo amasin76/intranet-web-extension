@@ -45,7 +45,7 @@ function generateCommandLine(dirName: string | undefined, fileNames: string[]): 
 	const subDirs = new Set<string>();
 
 	if (dirName === undefined) return (commandLine = "No files or dirs got found.");
-	commandLine = `mkdir "${dirName}" && cd "${dirName}" && touch README.md `;
+	commandLine = `mkdir -p "${dirName}" && cd "${dirName}" && touch README.md `;
 
 	fileNames.forEach((fileName) => {
 		const parts = fileName.split("/");
