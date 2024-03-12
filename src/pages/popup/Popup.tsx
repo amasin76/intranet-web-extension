@@ -76,6 +76,7 @@ export const Popup: React.FC = () => {
 				href="https://github.com/amasin76/intranet-chrome-extension/releases"
 				target="_blank"
 				rel="noopener noreferrer"
+				title="Releases"
 			>
 				v{version}
 			</a>

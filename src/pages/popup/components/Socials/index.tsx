@@ -9,16 +9,23 @@ export const Socials = () => {
 				href="https://chrome.google.com/webstore/detail/alx-intranet/eagnmhadjdelkimfjbelmndejpepgmef/"
 				target="_blank"
 				rel="noopener noreferrer"
+				title="Rate us ❤️"
 			>
 				<AiFillStar className="icon" />
 			</a>
-			<a href="https://forms.gle/BLn5yXcwQeK8aKgu5" target="_blank" rel="noopener noreferrer">
+			<a
+				href="https://forms.gle/BLn5yXcwQeK8aKgu5"
+				target="_blank"
+				rel="noopener noreferrer"
+				title="Feedback Form"
+			>
 				<AiFillEdit className="icon" />
 			</a>
 			<a
 				href="https://github.com/amasin76/intranet-chrome-extension/issues/new/choose"
 				target="_blank"
 				rel="noopener noreferrer"
+				title="Report Bug/Feature"
 			>
 				<AiFillBug className="icon" />
 			</a>
@@ -26,12 +33,14 @@ export const Socials = () => {
 				href="https://github.com/amasin76/intranet-chrome-extension"
 				target="_blank"
 				rel="noopener noreferrer"
+				title="Github Repository"
 			>
 				<AiFillGithub className="icon" />
 			</a>
 			<a
 				target="_blank"
 				rel="noopener noreferrer"
+				title="Go to Settings Page"
 				onClick={() => {
 					if (chrome && chrome.runtime && chrome.runtime.openOptionsPage) {
 						chrome.runtime.openOptionsPage();
