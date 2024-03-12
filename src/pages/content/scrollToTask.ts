@@ -26,10 +26,17 @@ function scrollToTask(): void {
 				resourcesElement && resourcesElement.scrollIntoView();
 			}
 		}
+
 		if (event.ctrlKey && event.key === "k") {
-			const searchButton: HTMLElement = document.querySelector("#search-button");
+			const searchBtn: HTMLButtonElement = document.querySelector("#search-button");
 			event.preventDefault();
-			searchButton && searchButton.click();
+			searchBtn && searchBtn.click();
+		}
+
+		if (event.key === "q") {
+			const quizSubmitBtn: HTMLButtonElement = document.querySelector(".quiz_questions_results button");
+			event.preventDefault();
+			quizSubmitBtn && quizSubmitBtn.click();
 		}
 	});
 
