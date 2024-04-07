@@ -1,7 +1,12 @@
-import packageJson from "./package.json";
+import fs from "node:fs";
+const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf8"));
 
-const manifest: chrome.runtime.ManifestV3 = {
+/**
+ * @type {chrome.runtime.ManifestV3}
+ */
+const manifest = {
 	manifest_version: 3,
+	homepage_url: "https://github.com/amasin76/intranet-chrome-extension",
 	name: "ALX Intranet",
 	version: packageJson.version,
 	description: packageJson.description,
@@ -17,7 +22,7 @@ const manifest: chrome.runtime.ManifestV3 = {
 		default_icon: "icon-32.png",
 	},
 	icons: {
-		"128": "icon-128.png",
+		128: "icon-128.png",
 	},
 	content_scripts: [
 		{

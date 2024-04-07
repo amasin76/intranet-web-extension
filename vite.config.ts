@@ -1,53 +1,35 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import svgr from "vite-plugin-svgr";
 import path, { resolve } from "path";
-import makeManifest from "./utils/plugins/make-manifest";
-import customDynamicImport from "./utils/plugins/custom-dynamic-import";
-import addHmr from "./utils/plugins/add-hmr";
-import watchRebuild from "./utils/plugins/watch-rebuild";
-import manifest from "./manifest";
+import { getCacheInvalidationKey, getPlugins } from "./utils/vite";
 
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, "src");
 const pagesDir = resolve(srcDir, "pages");
-const assetsDir = resolve(srcDir, "assets");
-const outDir = resolve(rootDir, "dist");
-const publicDir = resolve(rootDir, "public");
 
 const isDev = process.env.__DEV__ === "true";
 const isProduction = !isDev;
-
-// ENABLE HMR IN BACKGROUND SCRIPT
-const enableHmrInBackgroundScript = true;
 
 export default defineConfig({
 	resolve: {
 		alias: {
 			"@root": rootDir,
 			"@src": srcDir,
-			"@assets": assetsDir,
+			"@assets": resolve(srcDir, "assets"),
 			"@pages": pagesDir,
 		},
 	},
-	plugins: [
-		react(),
-		svgr(),
-		makeManifest(manifest, {
-			isDev,
-			contentScriptCssKey: regenerateCacheInvalidationKey(),
-		}),
-		customDynamicImport(),
-		addHmr({ background: enableHmrInBackgroundScript, view: true }),
-		watchRebuild(),
-	],
-	publicDir,
+	plugins: [...getPlugins(isDev), react()],
+	publicDir: resolve(rootDir, "public"),
 	build: {
-		outDir,
-		/** Can slowDown build speed. */
+		outDir: resolve(rootDir, "dist"),
+		/** Can slow down build speed. */
 		// sourcemap: isDev,
 		minify: isProduction,
+		modulePreload: false,
 		reportCompressedSize: isProduction,
+		emptyOutDir: !isDev,
 		rollupOptions: {
 			input: {
 				// ADD: particles.js page to the content
@@ -61,30 +43,17 @@ export default defineConfig({
 				entryFileNames: "src/pages/[name]/index.js",
 				chunkFileNames: isDev ? "assets/js/[name].js" : "assets/js/[name].[hash].js",
 				assetFileNames: (assetInfo) => {
-					const { dir, name: _name } = path.parse(assetInfo.name);
-					const assetFolder = dir.split("/").at(-1);
-					const name = assetFolder + firstUpperCase(_name);
-					if (name === "contentStyle") {
-						return `assets/css/contentStyle${cacheInvalidationKey}.chunk.css`;
-					}
-					return `assets/[ext]/${name}.chunk.[ext]`;
+					const { name } = path.parse(assetInfo.name);
+					const assetFileName = name === "contentStyle" ? `${name}${getCacheInvalidationKey()}` : name;
+					return `assets/[ext]/${assetFileName}.chunk.[ext]`;
 				},
 			},
 		},
 	},
+	test: {
+		globals: true,
+		environment: "jsdom",
+		include: ["**/*.test.ts", "**/*.test.tsx"],
+		setupFiles: "./test-utils/vitest.setup.js",
+	},
 });
-
-function firstUpperCase(str: string) {
-	const firstAlphabet = new RegExp(/( |^)[a-z]/, "g");
-	return str.toLowerCase().replace(firstAlphabet, (L) => L.toUpperCase());
-}
-
-let cacheInvalidationKey: string = generateKey();
-function regenerateCacheInvalidationKey() {
-	cacheInvalidationKey = generateKey();
-	return cacheInvalidationKey;
-}
-
-function generateKey(): string {
-	return `${(Date.now() / 100).toFixed()}`;
-}
