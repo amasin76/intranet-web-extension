@@ -10,7 +10,7 @@ const manifest = {
 	name: "ALX Intranet",
 	version: packageJson.version,
 	description: packageJson.description,
-	permissions: ["storage", "scripting"],
+	permissions: ["storage", "scripting", "clipboardWrite"],
 	host_permissions: ["https://intranet.alxswe.com/*"],
 	options_page: "src/pages/options/index.html",
 	background: {

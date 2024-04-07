@@ -88,6 +88,7 @@ const copyCmdFiles = (sendResponse) => {
 	textarea.textContent = commandLine;
 	document.body.appendChild(textarea);
 
+	textarea.focus();
 	textarea.select();
 
 	try {
