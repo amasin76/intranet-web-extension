@@ -50,10 +50,10 @@ export const Popup: React.FC = () => {
 			{isUrlMatch && (
 				<>
 					{advancedTasksLocked && (
-						<a id="unlock-advanced-tasks" className="badge label" href="#" onClick={handleUnlockClick}>
+						<button id="unlock-advanced-tasks" className="badge label" onClick={handleUnlockClick}>
 							Unlock Advanced Tasks
 							<TbRefresh className="icon" />
-						</a>
+						</button>
 					)}
 					<GetFiles />
 					<DataProvider>
@@ -84,4 +84,4 @@ export const Popup: React.FC = () => {
 	);
 };
 
-export default withSuspense(Popup);
+export default withSuspense(Popup, <div>Loading...</div>);
