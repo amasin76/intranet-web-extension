@@ -1,3 +1,5 @@
+@import "@assets/style/sanitize.css";
+
 :root {
 	--clr-green-light: #4caf50;
 	--clr-green-dark: #00800033;
@@ -10,6 +12,7 @@ body {
 	display: block;
 	position: relative;
 	background-color: #222;
+	font-family: "Noto Sans", Arial, sans-serif;
 	color: #eee;
 	width: 20rem;
 	min-height: 30rem;

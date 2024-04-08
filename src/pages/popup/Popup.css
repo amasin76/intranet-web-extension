@@ -4,6 +4,10 @@ h1 {
 	margin-bottom: 0.5rem;
 }
 
+h2 {
+	font-size: 1.25rem;
+}
+
 hr {
 	border: none;
 	border-bottom: 1px solid #444;
