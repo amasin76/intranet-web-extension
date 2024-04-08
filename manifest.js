@@ -6,7 +6,7 @@ const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf8"));
  */
 const manifest = {
 	manifest_version: 3,
-	homepage_url: "https://github.com/amasin76/intranet-chrome-extension",
+	homepage_url: "https://github.com/amasin76/intranet-web-extension",
 	name: "ALX Intranet",
 	version: packageJson.version,
 	description: packageJson.description,

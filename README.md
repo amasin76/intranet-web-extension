@@ -34,7 +34,7 @@ fully customize the styling of your intranet page
 There are several ways to install the extension:
 
 - **Chrome Web Store**: You can install the extension directly from the <a rel="noreferrer noopener" target="_blank" href="https://chrome.google.com/webstore/detail/alx-intranet/eagnmhadjdelkimfjbelmndejpepgmef">Chrome Web Store</a>. Updates may be delayed by ~2 days due to the store review process.
-- **Release Assets**: You can download the ZIP file from the <a rel="noreferrer noopener" target="_blank" href="https://github.com/amasin76/intranet-chrome-extension/releases">Release Assets</a> and extract it to a folder on your computer. Then,
+- **Release Assets**: You can download the ZIP file from the <a rel="noreferrer noopener" target="_blank" href="https://github.com/amasin76/intranet-web-extension/releases">Release Assets</a> and extract it to a folder on your computer. Then,
    - Open your browser and navigate to the extensions page (`chrome://extensions` for Chrome or `edge://extensions` for Edge).
    - Enable developer mode by toggling the switch in the top right corner of the extensions page.
    - Click on the Load unpacked button and select the folder where you extracted the extension files.
@@ -86,7 +86,7 @@ As an open-source project, contributions are welcome and appreciated! If you wou
 If you have any questions or need help with the contribution process, feel free to open an issue on the project’s GitHub repository or Discord: Bio#2408
 
 ## 🚀 Feedback
-Report a bug      ➡️ <a rel="noreferrer noopener" target="_blank" href="https://github.com/amasin76/intranet-chrome-extension/issues/new/choose">GitHub Issue > Bug Report.</a>  
-Request a feature ➡️ <a rel="noreferrer noopener" target="_blank" href="https://github.com/amasin76/intranet-chrome-extension/issues/new/choose">GitHub Issue > Feature Request.</a>  
+Report a bug      ➡️ <a rel="noreferrer noopener" target="_blank" href="https://github.com/amasin76/intranet-web-extension/issues/new/choose">GitHub Issue > Bug Report.</a>  
+Request a feature ➡️ <a rel="noreferrer noopener" target="_blank" href="https://github.com/amasin76/intranet-web-extension/issues/new/choose">GitHub Issue > Feature Request.</a>  
 Chit Chat         ➡️ <a rel="noreferrer noopener" target="_blank" href="https://discord.gg/H3SYN7yanW">Discord Server</a>  
 Form              ➡️ <a rel="noreferrer noopener" target="_blank" href="https://forms.gle/BLn5yXcwQeK8aKgu5">Google forms</a>  

@@ -6,7 +6,7 @@ export const Socials = () => {
 	return (
 		<div className="socials">
 			<a
-				href="https://chrome.google.com/webstore/detail/alx-intranet/eagnmhadjdelkimfjbelmndejpepgmef/"
+				href="https://chromewebstore.google.com/detail/alx-intranet/eagnmhadjdelkimfjbelmndejpepgmef"
 				target="_blank"
 				rel="noopener noreferrer"
 				title="Rate us ❤️"
@@ -22,7 +22,7 @@ export const Socials = () => {
 				<AiFillEdit className="icon" />
 			</a>
 			<a
-				href="https://github.com/amasin76/intranet-chrome-extension/issues/new/choose"
+				href="https://github.com/amasin76/intranet-web-extension/issues/new/choose"
 				target="_blank"
 				rel="noopener noreferrer"
 				title="Report Bug/Feature"
@@ -30,7 +30,7 @@ export const Socials = () => {
 				<AiFillBug className="icon" />
 			</a>
 			<a
-				href="https://github.com/amasin76/intranet-chrome-extension"
+				href="https://github.com/amasin76/intranet-web-extension"
 				target="_blank"
 				rel="noopener noreferrer"
 				title="Github Repository"
