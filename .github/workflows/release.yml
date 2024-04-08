@@ -11,38 +11,49 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [18]
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup Node.js
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          cache: "yarn"
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
 
-      - uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-
-      - run: yarn install
-
-      - run: yarn build
-
-      - name: Create Zip
-        run: |
-          cd dist
-          zip -r ../${{ github.event.repository.name }}-${{ github.ref_name }}.zip .
+      # Create Chrome build
+      - name: Build chrome dist
+        run: pnpm run build
+      - run: mkdir ./builds
+      - name: Zip firefox dist
+        run: cd ./dist ; zip -r ../builds/${{ github.event.repository.name }}-${{ github.ref_name }}-chrome.zip .
+      # Create Firefox build
+      - name: Build firefox dist
+        run: pnpm run build:firefox
+      - name: Zip firefox dist
+        run: cd ./dist ; zip -r ../builds/${{ github.event.repository.name }}-${{ github.ref_name }}-firefox.zip .
 
       - name: Generate SHA256
         id: sha
         run: |
-          echo "sha=$(sha256sum ${{ github.event.repository.name }}-${{ github.ref_name }}.zip | awk '{ print $1 }')" >> $GITHUB_ENV
+          echo "chrome_sha=$(sha256sum ./builds/*-chrome.zip | awk '{ print $1 }')" >> $GITHUB_ENV
+          echo "firefox_sha=$(sha256sum ./builds/*-firefox.zip | awk '{ print $1 }')" >> $GITHUB_ENV
 
-      - name: Create Release and Upload Asset
-        uses: softprops/action-gh-release@v1
+      - name: Upload chrome and firefox builds to release
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ./${{ github.event.repository.name }}-${{ github.ref_name }}.zip
-          body: "### Checksum (SHA256):\n```\n${{ env.sha }}\n```"
+          files: ./builds/*
+          body: |
+            ### Checksum (SHA256):
+            ```
+            chrome : ${{ env.chrome_sha }}
+            firefox: ${{ env.firefox_sha }}
+            ```
