@@ -1,11 +1,11 @@
 {
   "name": "alx-intranet",
-  "version": "0.3.6",
+  "version": "1.0.0",
   "description": "Enhance your experience of intranet projects/tasks",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/amasin76/intranet-chrome-extension"
+    "url": "https://github.com/amasin76/intranet-web-extension"
   },
   "scripts": {
     "build": "tsc --noEmit && vite build",
