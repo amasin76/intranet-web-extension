@@ -2,7 +2,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path, { resolve } from "path";
-import { getCacheInvalidationKey, getPlugins } from "./utils/vite";
+import { generateFileKey, getPlugins } from "./utils/vite";
 
 const rootDir = resolve(__dirname);
 const srcDir = resolve(rootDir, "src");
@@ -44,7 +44,8 @@ export default defineConfig({
 				chunkFileNames: isDev ? "assets/js/[name].js" : "assets/js/[name].[hash].js",
 				assetFileNames: (assetInfo) => {
 					const { name } = path.parse(assetInfo.name);
-					const assetFileName = name === "contentStyle" ? `${name}${getCacheInvalidationKey()}` : name;
+					const assetFileName =
+						name === "contentStyle" ? `${name}${generateFileKey("src/pages/content/style.scss")}` : name;
 					return `assets/[ext]/${assetFileName}.chunk.[ext]`;
 				},
 			},
